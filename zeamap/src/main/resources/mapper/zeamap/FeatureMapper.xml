@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.zeamap.mapper.FeatureMapper">
+    
+    <resultMap type="Feature" id="FeatureResult">
+        <result property="featureId"    column="feature_id"    />
+        <result property="uniquename"    column="uniquename"    />
+        <result property="residues"    column="residues"    />
+        <result property="seqlen"    column="seqlen"    />
+        <result property="dbxrefId"    column="dbxref_id"    />
+        <result property="typeId"    column="type_id"    />
+        <result property="commonname"    column="commonname"    />
+        <result property="status"    column="status"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectFeatureVo">
+        select feature_id, uniquename, residues, seqlen, dbxref_id, type_id, commonname, status, create_by, create_time, update_by, update_time, remark from feature
+    </sql>
+
+    <select id="selectFeatureList" parameterType="Feature" resultMap="FeatureResult">
+        <include refid="selectFeatureVo"/>
+        <where>  
+            <if test="uniquename != null  and uniquename != ''"> and uniquename like concat('%', #{uniquename}, '%')</if>
+            <if test="residues != null  and residues != ''"> and residues = #{residues}</if>
+            <if test="seqlen != null  and seqlen != ''"> and seqlen = #{seqlen}</if>
+            <if test="dbxrefId != null "> and dbxref_id = #{dbxrefId}</if>
+            <if test="typeId != null "> and type_id = #{typeId}</if>
+            <if test="commonname != null  and commonname != ''"> and commonname like concat('%', #{commonname}, '%')</if>
+            <if test="status != null  and status != ''"> and status = #{status}</if>
+        </where>
+    </select>
+    
+    <select id="selectFeatureByFeatureId" parameterType="Long" resultMap="FeatureResult">
+        <include refid="selectFeatureVo"/>
+        where feature_id = #{featureId}
+    </select>
+        
+    <insert id="insertFeature" parameterType="Feature">
+        insert into feature
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="featureId != null">feature_id,</if>
+            <if test="uniquename != null and uniquename != ''">uniquename,</if>
+            <if test="residues != null">residues,</if>
+            <if test="seqlen != null">seqlen,</if>
+            <if test="dbxrefId != null">dbxref_id,</if>
+            <if test="typeId != null">type_id,</if>
+            <if test="commonname != null">commonname,</if>
+            <if test="status != null">status,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="featureId != null">#{featureId},</if>
+            <if test="uniquename != null and uniquename != ''">#{uniquename},</if>
+            <if test="residues != null">#{residues},</if>
+            <if test="seqlen != null">#{seqlen},</if>
+            <if test="dbxrefId != null">#{dbxrefId},</if>
+            <if test="typeId != null">#{typeId},</if>
+            <if test="commonname != null">#{commonname},</if>
+            <if test="status != null">#{status},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateFeature" parameterType="Feature">
+        update feature
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="uniquename != null and uniquename != ''">uniquename = #{uniquename},</if>
+            <if test="residues != null">residues = #{residues},</if>
+            <if test="seqlen != null">seqlen = #{seqlen},</if>
+            <if test="dbxrefId != null">dbxref_id = #{dbxrefId},</if>
+            <if test="typeId != null">type_id = #{typeId},</if>
+            <if test="commonname != null">commonname = #{commonname},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where feature_id = #{featureId}
+    </update>
+
+    <delete id="deleteFeatureByFeatureId" parameterType="Long">
+        delete from feature where feature_id = #{featureId}
+    </delete>
+
+    <delete id="deleteFeatureByFeatureIds" parameterType="String">
+        delete from feature where feature_id in 
+        <foreach item="featureId" collection="array" open="(" separator="," close=")">
+            #{featureId}
+        </foreach>
+    </delete>
+</mapper>
