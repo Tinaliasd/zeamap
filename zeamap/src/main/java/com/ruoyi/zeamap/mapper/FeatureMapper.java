@@ -4,7 +4,7 @@ import java.util.List;
 import com.ruoyi.zeamap.domain.Feature;
 
 /**
- * 【请填写功能名称】Mapper接口
+ * featureMapper接口
  * 
  * @author ruoyi
  * @date 2022-10-30
@@ -12,47 +12,47 @@ import com.ruoyi.zeamap.domain.Feature;
 public interface FeatureMapper 
 {
     /**
-     * 查询【请填写功能名称】
+     * 查询feature
      * 
-     * @param featureId 【请填写功能名称】主键
-     * @return 【请填写功能名称】
+     * @param featureId feature主键
+     * @return feature
      */
     public Feature selectFeatureByFeatureId(Long featureId);
 
     /**
-     * 查询【请填写功能名称】列表
+     * 查询feature列表
      * 
-     * @param feature 【请填写功能名称】
-     * @return 【请填写功能名称】集合
+     * @param feature feature
+     * @return feature集合
      */
     public List<Feature> selectFeatureList(Feature feature);
 
     /**
-     * 新增【请填写功能名称】
+     * 新增feature
      * 
-     * @param feature 【请填写功能名称】
+     * @param feature feature
      * @return 结果
      */
     public int insertFeature(Feature feature);
 
     /**
-     * 修改【请填写功能名称】
+     * 修改feature
      * 
-     * @param feature 【请填写功能名称】
+     * @param feature feature
      * @return 结果
      */
     public int updateFeature(Feature feature);
 
     /**
-     * 删除【请填写功能名称】
+     * 删除feature
      * 
-     * @param featureId 【请填写功能名称】主键
+     * @param featureId feature主键
      * @return 结果
      */
     public int deleteFeatureByFeatureId(Long featureId);
 
     /**
-     * 批量删除【请填写功能名称】
+     * 批量删除feature
      * 
      * @param featureIds 需要删除的数据主键集合
      * @return 结果

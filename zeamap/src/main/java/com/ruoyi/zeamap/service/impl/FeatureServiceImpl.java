@@ -9,7 +9,7 @@ import com.ruoyi.zeamap.domain.Feature;
 import com.ruoyi.zeamap.service.IFeatureService;
 
 /**
- * 【请填写功能名称】Service业务层处理
+ * featureService业务层处理
  * 
  * @author ruoyi
  * @date 2022-10-30
@@ -21,10 +21,10 @@ public class FeatureServiceImpl implements IFeatureService
     private FeatureMapper featureMapper;
 
     /**
-     * 查询【请填写功能名称】
+     * 查询feature
      * 
-     * @param featureId 【请填写功能名称】主键
-     * @return 【请填写功能名称】
+     * @param featureId feature主键
+     * @return feature
      */
     @Override
     public Feature selectFeatureByFeatureId(Long featureId)
@@ -33,10 +33,10 @@ public class FeatureServiceImpl implements IFeatureService
     }
 
     /**
-     * 查询【请填写功能名称】列表
+     * 查询feature列表
      * 
-     * @param feature 【请填写功能名称】
-     * @return 【请填写功能名称】
+     * @param feature feature
+     * @return feature
      */
     @Override
     public List<Feature> selectFeatureList(Feature feature)
@@ -45,9 +45,9 @@ public class FeatureServiceImpl implements IFeatureService
     }
 
     /**
-     * 新增【请填写功能名称】
+     * 新增feature
      * 
-     * @param feature 【请填写功能名称】
+     * @param feature feature
      * @return 结果
      */
     @Override
@@ -58,9 +58,9 @@ public class FeatureServiceImpl implements IFeatureService
     }
 
     /**
-     * 修改【请填写功能名称】
+     * 修改feature
      * 
-     * @param feature 【请填写功能名称】
+     * @param feature feature
      * @return 结果
      */
     @Override
@@ -71,9 +71,9 @@ public class FeatureServiceImpl implements IFeatureService
     }
 
     /**
-     * 批量删除【请填写功能名称】
+     * 批量删除feature
      * 
-     * @param featureIds 需要删除的【请填写功能名称】主键
+     * @param featureIds 需要删除的feature主键
      * @return 结果
      */
     @Override
@@ -83,9 +83,9 @@ public class FeatureServiceImpl implements IFeatureService
     }
 
     /**
-     * 删除【请填写功能名称】信息
+     * 删除feature信息
      * 
-     * @param featureId 【请填写功能名称】主键
+     * @param featureId feature主键
      * @return 结果
      */
     @Override
