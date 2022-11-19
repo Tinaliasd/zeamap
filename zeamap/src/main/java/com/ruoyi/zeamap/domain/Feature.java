@@ -6,10 +6,10 @@ import com.ruoyi.common.annotation.Excel;
 import com.ruoyi.common.core.domain.BaseEntity;
 
 /**
- * 【请填写功能名称】对象 feature
+ * feature对象 feature
  * 
  * @author ruoyi
- * @date 2022-10-30
+ * @date 2022-11-19
  */
 public class Feature extends BaseEntity
 {

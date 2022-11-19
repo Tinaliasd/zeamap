@@ -22,10 +22,10 @@ import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.common.core.page.TableDataInfo;
 
 /**
- * 【请填写功能名称】Controller
+ * featureController
  * 
  * @author ruoyi
- * @date 2022-10-30
+ * @date 2022-11-19
  */
 @RestController
 @RequestMapping("/zeamap/feature")
@@ -35,7 +35,7 @@ public class FeatureController extends BaseController
     private IFeatureService featureService;
 
     /**
-     * 查询【请填写功能名称】列表
+     * 查询feature列表
      */
     @PreAuthorize("@ss.hasPermi('zeamap:feature:list')")
     @GetMapping("/list")
@@ -47,20 +47,20 @@ public class FeatureController extends BaseController
     }
 
     /**
-     * 导出【请填写功能名称】列表
+     * 导出feature列表
      */
     @PreAuthorize("@ss.hasPermi('zeamap:feature:export')")
-    @Log(title = "【请填写功能名称】", businessType = BusinessType.EXPORT)
+    @Log(title = "feature", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, Feature feature)
     {
         List<Feature> list = featureService.selectFeatureList(feature);
         ExcelUtil<Feature> util = new ExcelUtil<Feature>(Feature.class);
-        util.exportExcel(response, list, "【请填写功能名称】数据");
+        util.exportExcel(response, list, "feature数据");
     }
 
     /**
-     * 获取【请填写功能名称】详细信息
+     * 获取feature详细信息
      */
     @PreAuthorize("@ss.hasPermi('zeamap:feature:query')")
     @GetMapping(value = "/{featureId}")
@@ -70,10 +70,10 @@ public class FeatureController extends BaseController
     }
 
     /**
-     * 新增【请填写功能名称】
+     * 新增feature
      */
     @PreAuthorize("@ss.hasPermi('zeamap:feature:add')")
-    @Log(title = "【请填写功能名称】", businessType = BusinessType.INSERT)
+    @Log(title = "feature", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody Feature feature)
     {
@@ -81,10 +81,10 @@ public class FeatureController extends BaseController
     }
 
     /**
-     * 修改【请填写功能名称】
+     * 修改feature
      */
     @PreAuthorize("@ss.hasPermi('zeamap:feature:edit')")
-    @Log(title = "【请填写功能名称】", businessType = BusinessType.UPDATE)
+    @Log(title = "feature", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody Feature feature)
     {
@@ -92,10 +92,10 @@ public class FeatureController extends BaseController
     }
 
     /**
-     * 删除【请填写功能名称】
+     * 删除feature
      */
     @PreAuthorize("@ss.hasPermi('zeamap:feature:remove')")
-    @Log(title = "【请填写功能名称】", businessType = BusinessType.DELETE)
+    @Log(title = "feature", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{featureIds}")
     public AjaxResult remove(@PathVariable Long[] featureIds)
     {
