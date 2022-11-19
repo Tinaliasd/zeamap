@@ -27,13 +27,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="selectFeatureList" parameterType="Feature" resultMap="FeatureResult">
         <include refid="selectFeatureVo"/>
         <where>  
-            <if test="uniquename != null  and uniquename != ''"> and uniquename like concat('%', #{uniquename}, '%')</if>
-            <if test="residues != null  and residues != ''"> and residues = #{residues}</if>
-            <if test="seqlen != null  and seqlen != ''"> and seqlen = #{seqlen}</if>
-            <if test="dbxrefId != null "> and dbxref_id = #{dbxrefId}</if>
-            <if test="typeId != null "> and type_id = #{typeId}</if>
-            <if test="commonname != null  and commonname != ''"> and commonname like concat('%', #{commonname}, '%')</if>
-            <if test="status != null  and status != ''"> and status = #{status}</if>
+            <if test="uniquename != null  and uniquename != ''"> and uniquename = #{uniquename}</if>
+            <if test="commonname != null  and commonname != ''"> and commonname = #{commonname}</if>
         </where>
     </select>
     
@@ -46,12 +41,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         insert into feature
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="featureId != null">feature_id,</if>
-            <if test="uniquename != null and uniquename != ''">uniquename,</if>
+            <if test="uniquename != null">uniquename,</if>
             <if test="residues != null">residues,</if>
             <if test="seqlen != null">seqlen,</if>
             <if test="dbxrefId != null">dbxref_id,</if>
             <if test="typeId != null">type_id,</if>
-            <if test="commonname != null">commonname,</if>
+            <if test="commonname != null and commonname != ''">commonname,</if>
             <if test="status != null">status,</if>
             <if test="createBy != null">create_by,</if>
             <if test="createTime != null">create_time,</if>
@@ -61,12 +56,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="featureId != null">#{featureId},</if>
-            <if test="uniquename != null and uniquename != ''">#{uniquename},</if>
+            <if test="uniquename != null">#{uniquename},</if>
             <if test="residues != null">#{residues},</if>
             <if test="seqlen != null">#{seqlen},</if>
             <if test="dbxrefId != null">#{dbxrefId},</if>
             <if test="typeId != null">#{typeId},</if>
-            <if test="commonname != null">#{commonname},</if>
+            <if test="commonname != null and commonname != ''">#{commonname},</if>
             <if test="status != null">#{status},</if>
             <if test="createBy != null">#{createBy},</if>
             <if test="createTime != null">#{createTime},</if>
@@ -79,12 +74,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <update id="updateFeature" parameterType="Feature">
         update feature
         <trim prefix="SET" suffixOverrides=",">
-            <if test="uniquename != null and uniquename != ''">uniquename = #{uniquename},</if>
+            <if test="uniquename != null">uniquename = #{uniquename},</if>
             <if test="residues != null">residues = #{residues},</if>
             <if test="seqlen != null">seqlen = #{seqlen},</if>
             <if test="dbxrefId != null">dbxref_id = #{dbxrefId},</if>
             <if test="typeId != null">type_id = #{typeId},</if>
-            <if test="commonname != null">commonname = #{commonname},</if>
+            <if test="commonname != null and commonname != ''">commonname = #{commonname},</if>
             <if test="status != null">status = #{status},</if>
             <if test="createBy != null">create_by = #{createBy},</if>
             <if test="createTime != null">create_time = #{createTime},</if>
