@@ -1,7 +1,11 @@
 package com.ruoyi.zeamap.service.impl;
 
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
 import com.ruoyi.common.utils.DateUtils;
+import com.ruoyi.zeamap.domain.Tissue;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.zeamap.mapper.FeatureMapper;
@@ -15,7 +19,7 @@ import com.ruoyi.zeamap.service.IFeatureService;
  * @date 2022-11-19
  */
 @Service
-public class FeatureServiceImpl implements IFeatureService 
+public class FeatureServiceImpl implements IFeatureService
 {
     @Autowired
     private FeatureMapper featureMapper;
@@ -92,5 +96,26 @@ public class FeatureServiceImpl implements IFeatureService
     public int deleteFeatureByFeatureId(Long featureId)
     {
         return featureMapper.deleteFeatureByFeatureId(featureId);
+    }
+
+    /**
+     *  通过unquename 查找id
+     * @param
+     * @return
+     */
+    @Override
+    public int selectId(String uniquename) {
+
+        return featureMapper.selectByUniquename(uniquename);
+    }
+
+    @Override
+    public Map<String, String> selectByUniquenameToExpression(String uniquename) {
+        int feature_id = selectId(uniquename);
+        List<Tissue> res = featureMapper.selectMapTissue(feature_id);
+
+        Map<String, String> TissueMap = res.stream().distinct().collect(Collectors.toMap(item -> item.getTissueDesc(), item -> item.getTissueSvgclass()));
+
+        return TissueMap;
     }
 }

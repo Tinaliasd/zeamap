@@ -1,7 +1,10 @@
 package com.ruoyi.zeamap.service;
 
 import java.util.List;
+import java.util.Map;
+
 import com.ruoyi.zeamap.domain.Feature;
+import com.ruoyi.zeamap.domain.Tissue;
 
 /**
  * featureService接口
@@ -58,4 +61,9 @@ public interface IFeatureService
      * @return 结果
      */
     public int deleteFeatureByFeatureId(Long featureId);
+
+    public int selectId(String uniquename);
+
+
+    public Map<String, String> selectByUniquenameToExpression(String uniquename);
 }

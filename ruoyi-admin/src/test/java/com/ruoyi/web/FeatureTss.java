@@ -1,10 +1,13 @@
 package com.ruoyi.web;
 
 import com.ruoyi.zeamap.domain.Feature;
+import com.ruoyi.zeamap.domain.Tissue;
 import com.ruoyi.zeamap.service.IFeatureService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.List;
 
 /**
  * @program: ruoyi
@@ -19,9 +22,9 @@ public class FeatureTss {
 
     @Test
     public void testFeature() {
-        Feature feature = new Feature();
-        feature.setCommonname("z1");
-        featureService.selectFeatureList(feature);
+
+        featureService.selectByUniquenameToExpression("111").forEach((e,v) -> System.out.println(e+" "+v));
+
     }
 
 }

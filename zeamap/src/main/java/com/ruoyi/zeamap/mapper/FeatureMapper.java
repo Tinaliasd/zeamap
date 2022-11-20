@@ -1,7 +1,10 @@
 package com.ruoyi.zeamap.mapper;
 
 import java.util.List;
+import java.util.Map;
+
 import com.ruoyi.zeamap.domain.Feature;
+import com.ruoyi.zeamap.domain.Tissue;
 
 /**
  * featureMapper接口
@@ -58,4 +61,8 @@ public interface FeatureMapper
      * @return 结果
      */
     public int deleteFeatureByFeatureIds(Long[] featureIds);
+
+    public int selectByUniquename(String uniquename);
+
+    public List<Tissue> selectMapTissue(int feature_id);
 }
