@@ -2,6 +2,7 @@ package com.ruoyi.zeamap.mapper;
 
 import java.util.List;
 import com.ruoyi.zeamap.domain.Expression;
+import com.ruoyi.zeamap.vo.ExpressionVo;
 
 /**
  * 基因表达量查询Mapper接口
@@ -58,4 +59,11 @@ public interface ExpressionMapper
      * @return 结果
      */
     public int deleteExpressionByExpressionIds(Long[] expressionIds);
+
+    public List<Expression> selectMapExpression(Long featureId);
+
+    public List<Expression> selectmultiExpressionListTissue(ExpressionVo expressionVo);
+    public List<Expression> selectmultiExpressionListGermplasm(ExpressionVo expressionVo);
+    public List<Expression> selectmultiExpressionListEnvironment(ExpressionVo expressionVo);
+
 }

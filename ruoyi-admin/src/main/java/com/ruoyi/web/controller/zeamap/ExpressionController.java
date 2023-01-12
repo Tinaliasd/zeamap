@@ -2,6 +2,8 @@ package com.ruoyi.web.controller.zeamap;
 
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
+
+import com.ruoyi.zeamap.vo.ExpressionVo;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -101,4 +103,18 @@ public class ExpressionController extends BaseController
     {
         return toAjax(expressionService.deleteExpressionByExpressionIds(expressionIds));
     }
+
+
+    @PreAuthorize("@ss.hasPermi('zeamap:expression:list')")
+    @GetMapping("/multi")
+    public TableDataInfo multiExpression (@RequestBody ExpressionVo expressionVo)
+    {
+
+        startPage();
+        List<Expression> list = expressionService.selectmultiExpressionList(expressionVo);
+        return getDataTable(list);
+    }
+
+
+
 }

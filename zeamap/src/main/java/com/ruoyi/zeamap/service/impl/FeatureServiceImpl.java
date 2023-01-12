@@ -5,7 +5,11 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import com.ruoyi.common.utils.DateUtils;
+import com.ruoyi.zeamap.domain.Expression;
 import com.ruoyi.zeamap.domain.Tissue;
+import com.ruoyi.zeamap.mapper.ExpressionMapper;
+import com.ruoyi.zeamap.mapper.TissueMapper;
+import org.apache.ibatis.jdbc.Null;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.zeamap.mapper.FeatureMapper;
@@ -23,6 +27,10 @@ public class FeatureServiceImpl implements IFeatureService
 {
     @Autowired
     private FeatureMapper featureMapper;
+    @Autowired
+    private TissueMapper tissueMapper;
+    @Autowired
+    private ExpressionMapper expressionMapper;
 
     /**
      * 查询feature
@@ -104,18 +112,35 @@ public class FeatureServiceImpl implements IFeatureService
      * @return
      */
     @Override
-    public int selectId(String uniquename) {
+    public Long selectId(String uniquename) {
 
         return featureMapper.selectByUniquename(uniquename);
     }
 
     @Override
     public Map<String, String> selectByUniquenameToExpression(String uniquename) {
-        int feature_id = selectId(uniquename);
-        List<Tissue> res = featureMapper.selectMapTissue(feature_id);
+        Long featureId = selectId(uniquename);//查找id
+        if (featureId == null) {
+            return null;
+        }
 
-        Map<String, String> TissueMap = res.stream().distinct().collect(Collectors.toMap(item -> item.getTissueDesc(), item -> item.getTissueSvgclass()));
-
-        return TissueMap;
+        List<Tissue> res = tissueMapper.selectMapTissue(featureId);//查找组织然后转化
+        Map<String, String> tissueMap = res.stream().distinct().collect(Collectors.toMap(item -> item.getTissueDesc(), item -> item.getTissueSvgclass()));
+        return tissueMap;
     }
+
+
+    public Map<String,String> selectByUniquenameToTissue(String unquename) {
+        Long featureId = selectId(unquename);
+
+        if (featureId == null) {
+            return null;
+        }
+        List<Expression> res = expressionMapper.selectMapExpression(featureId);
+
+        Map<String, String> expressMap = res.stream().collect(Collectors.toMap(item -> (item.getTissue().getTissueDesc()), item -> item.getExpressionValue()));
+
+        return expressMap;
+    }
+
 }

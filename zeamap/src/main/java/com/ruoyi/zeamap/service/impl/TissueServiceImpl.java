@@ -1,7 +1,12 @@
 package com.ruoyi.zeamap.service.impl;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import com.ruoyi.common.utils.DateUtils;
+import com.ruoyi.zeamap.domain.Environment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.zeamap.mapper.TissueMapper;
@@ -92,5 +97,25 @@ public class TissueServiceImpl implements ITissueService
     public int deleteTissueByTissueId(Long tissueId)
     {
         return tissueMapper.deleteTissueByTissueId(tissueId);
+    }
+
+    @Override
+    public Map<String, List<String>> SelectorClassDesc() {
+
+        List<Tissue> tissues = tissueMapper.selectMultiSelectorClassDesc();
+
+        Map<String, List<String>> t = new HashMap<>();
+
+        for (Tissue tissue:tissues) {
+            if (t.get(tissue.getTissueClass())!=null){
+                List<String> envDesc = new ArrayList<>();
+                envDesc.add(tissue.getTissueDesc());
+                t.put(tissue.getTissueClass(), envDesc);
+            }else{
+                List<String> envDes = t.get(tissue.getTissueClass());
+                envDes.add(tissue.getTissueDesc());
+            }
+        }
+        return t;
     }
 }

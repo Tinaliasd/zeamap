@@ -58,4 +58,8 @@ public interface TissueMapper
      * @return 结果
      */
     public int deleteTissueByTissueIds(Long[] tissueIds);
+
+    public List<Tissue> selectMapTissue(Long feature_id);
+
+    public List<Tissue> selectMultiSelectorClassDesc();
 }

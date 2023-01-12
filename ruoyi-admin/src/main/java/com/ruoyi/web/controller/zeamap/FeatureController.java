@@ -3,6 +3,8 @@ package com.ruoyi.web.controller.zeamap;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpServletResponse;
+
+import org.apache.ibatis.jdbc.Null;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -95,13 +97,34 @@ public class FeatureController extends BaseController
         return toAjax(featureService.deleteFeatureByFeatureIds(featureIds));
     }
 
-
-    @GetMapping("/uniquename")
+    /**
+     * 5.1的一个请求
+     * @param uniquename
+     * @return
+     */
+    @GetMapping("/uniquename1")
     public AjaxResult TissueDescSvg(@RequestParam String uniquename) {
 
         Map<String, String> DataMap = featureService.selectByUniquenameToExpression(uniquename);
+
+        if (DataMap == null){//查询不到
+            return AjaxResult.error("此基因在库中不存在");
+        }
         return AjaxResult.success(DataMap);
     }
+
+    @GetMapping("/uniquename2")
+    public AjaxResult ExpressionTissue(@RequestParam String uniquename) {
+
+        Map<String, String> DataMap = featureService.selectByUniquenameToExpression(uniquename);
+
+        if (DataMap == null){//查询不到
+            return AjaxResult.error("此基因在库中不存在");
+        }
+
+        return AjaxResult.success(DataMap);
+    }
+
 
 
 }

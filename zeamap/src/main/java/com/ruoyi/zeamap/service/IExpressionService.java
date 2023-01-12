@@ -2,6 +2,7 @@ package com.ruoyi.zeamap.service;
 
 import java.util.List;
 import com.ruoyi.zeamap.domain.Expression;
+import com.ruoyi.zeamap.vo.ExpressionVo;
 
 /**
  * 基因表达量查询Service接口
@@ -58,4 +59,6 @@ public interface IExpressionService
      * @return 结果
      */
     public int deleteExpressionByExpressionId(Long expressionId);
+
+    List<Expression> selectmultiExpressionList(ExpressionVo expressionVo);
 }

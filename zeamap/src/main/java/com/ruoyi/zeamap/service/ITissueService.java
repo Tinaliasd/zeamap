@@ -1,6 +1,8 @@
 package com.ruoyi.zeamap.service;
 
 import java.util.List;
+import java.util.Map;
+
 import com.ruoyi.zeamap.domain.Tissue;
 
 /**
@@ -58,4 +60,8 @@ public interface ITissueService
      * @return 结果
      */
     public int deleteTissueByTissueId(Long tissueId);
+
+
+    public Map<String,List<String>> SelectorClassDesc();
+
 }

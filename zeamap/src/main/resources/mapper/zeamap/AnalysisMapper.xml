@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.zeamap.mapper.AnalysisMapper">
+    
+    <resultMap type="Analysis" id="AnalysisResult">
+        <result property="analysisId"    column="analysis_id"    />
+        <result property="name"    column="name"    />
+        <result property="description"    column="description"    />
+        <result property="program"    column="program"    />
+        <result property="programversion"    column="programversion"    />
+        <result property="doi"    column="doi"    />
+        <result property="url"    column="url"    />
+        <result property="source"    column="source"    />
+        <result property="dbxrefId"    column="dbxref_id"    />
+        <result property="populationId"    column="population_id"    />
+    </resultMap>
+
+    <sql id="selectAnalysisVo">
+        select analysis_id, name, description, program, programversion, doi, url, source, dbxref_id, population_id from analysis
+    </sql>
+
+    <select id="selectAnalysisList" parameterType="Analysis" resultMap="AnalysisResult">
+        <include refid="selectAnalysisVo"/>
+        <where>  
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="description != null  and description != ''"> and description = #{description}</if>
+            <if test="program != null  and program != ''"> and program = #{program}</if>
+            <if test="programversion != null  and programversion != ''"> and programversion = #{programversion}</if>
+            <if test="doi != null  and doi != ''"> and doi = #{doi}</if>
+            <if test="url != null  and url != ''"> and url = #{url}</if>
+            <if test="source != null  and source != ''"> and source = #{source}</if>
+            <if test="dbxrefId != null  and dbxrefId != ''"> and dbxref_id = #{dbxrefId}</if>
+        </where>
+    </select>
+    
+    <select id="selectAnalysisByAnalysisId" parameterType="Long" resultMap="AnalysisResult">
+        <include refid="selectAnalysisVo"/>
+        where analysis_id = #{analysisId}
+    </select>
+        
+    <insert id="insertAnalysis" parameterType="Analysis">
+        insert into analysis
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="analysisId != null">analysis_id,</if>
+            <if test="name != null">name,</if>
+            <if test="description != null">description,</if>
+            <if test="program != null">program,</if>
+            <if test="programversion != null">programversion,</if>
+            <if test="doi != null">doi,</if>
+            <if test="url != null">url,</if>
+            <if test="source != null">source,</if>
+            <if test="dbxrefId != null">dbxref_id,</if>
+            <if test="populationId != null">population_id,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="analysisId != null">#{analysisId},</if>
+            <if test="name != null">#{name},</if>
+            <if test="description != null">#{description},</if>
+            <if test="program != null">#{program},</if>
+            <if test="programversion != null">#{programversion},</if>
+            <if test="doi != null">#{doi},</if>
+            <if test="url != null">#{url},</if>
+            <if test="source != null">#{source},</if>
+            <if test="dbxrefId != null">#{dbxrefId},</if>
+            <if test="populationId != null">#{populationId},</if>
+         </trim>
+    </insert>
+
+    <update id="updateAnalysis" parameterType="Analysis">
+        update analysis
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null">name = #{name},</if>
+            <if test="description != null">description = #{description},</if>
+            <if test="program != null">program = #{program},</if>
+            <if test="programversion != null">programversion = #{programversion},</if>
+            <if test="doi != null">doi = #{doi},</if>
+            <if test="url != null">url = #{url},</if>
+            <if test="source != null">source = #{source},</if>
+            <if test="dbxrefId != null">dbxref_id = #{dbxrefId},</if>
+            <if test="populationId != null">population_id = #{populationId},</if>
+        </trim>
+        where analysis_id = #{analysisId}
+    </update>
+
+    <delete id="deleteAnalysisByAnalysisId" parameterType="Long">
+        delete from analysis where analysis_id = #{analysisId}
+    </delete>
+
+    <delete id="deleteAnalysisByAnalysisIds" parameterType="String">
+        delete from analysis where analysis_id in 
+        <foreach item="analysisId" collection="array" open="(" separator="," close=")">
+            #{analysisId}
+        </foreach>
+    </delete>
+</mapper>

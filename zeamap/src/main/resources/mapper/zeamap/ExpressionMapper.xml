@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.zeamap.mapper.ExpressionMapper">
+    
+    <resultMap type="Expression" id="ExpressionResult">
+        <result property="expressionId"    column="expression_id"    />
+        <result property="expressionValue"    column="expression_value"    />
+        <result property="expressionUnit"    column="expression_unit"    />
+        <result property="analysisId"    column="analysis_id"    />
+        <result property="environmentId"    column="environment_id"    />
+        <result property="featureId"    column="feature_id"    />
+        <result property="germplasmId"    column="germplasm_id"    />
+        <result property="tissueId"    column="tissue_id"    />
+        <result property="status"    column="status"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+        <association property="analysis" javaType="analysis" resultMap="com.ruoyi.zeamap.mapper.AnalysisMapper.AnalysisResult"></association>
+        <association property="environment" javaType="environment" resultMap="com.ruoyi.zeamap.mapper.EnvironmentMapper.EnvironmentResult"></association>
+        <association property="feature" javaType="feature" resultMap="com.ruoyi.zeamap.mapper.FeatureMapper.FeatureResult"></association>
+        <association property="germplasm" javaType="germplasm" resultMap="com.ruoyi.zeamap.mapper.GermplasmMapper.GermplasmResult"></association>
+        <association property="tissue" javaType="tissue" resultMap="com.ruoyi.zeamap.mapper.TissueMapper.TissueResult"></association>
+    </resultMap>
+
+    <sql id="selectExpressionVo">
+        select e.*,t.*  from expression e
+            inner join environment env on env.environment_id = e.environment_id
+            inner join analysis a on a.analysis_id = e.analysis_id
+            inner join germplasm g on g.germplasm_id =e.germplasm_id
+            inner join tissue t on t.tissue_id =e.tissue_id
+            inner join feature f on f.feature_id = e.feature_id
+    </sql>
+
+    <select id="selectExpressionList" parameterType="Expression" resultMap="ExpressionResult">
+        <include refid="selectExpressionVo"/>
+        <where>  
+            <if test="expressionValue != null  and expressionValue != ''"> and e.expression_value = #{expressionValue}</if>
+            <if test="expressionUnit != null  and expressionUnit != ''"> and e.expression_unit = #{expressionUnit}</if>
+            <if test="analysisId != null "> and e.analysis_id = #{analysisId}</if>
+            <if test="environmentId != null "> and e.environment_id = #{environmentId}</if>
+            <if test="featureId != null "> and e.feature_id = #{featureId}</if>
+            <if test="germplasmId != null "> and e.germplasm_id = #{germplasmId}</if>
+            <if test="tissueId != null "> and e.tissue_id = #{tissueId}</if>
+            <if test="status != null  and status != ''"> and e.status = #{status}</if>
+        </where>
+    </select>
+    
+    <select id="selectExpressionByExpressionId" parameterType="Long" resultMap="ExpressionResult">
+        <include refid="selectExpressionVo"/>
+        where e.expression_id = #{expressionId}
+    </select>
+        
+    <insert id="insertExpression" parameterType="Expression">
+        insert into expression
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="expressionId != null">expression_id,</if>
+            <if test="expressionValue != null">expression_value,</if>
+            <if test="expressionUnit != null">expression_unit,</if>
+            <if test="analysisId != null">analysis_id,</if>
+            <if test="environmentId != null">environment_id,</if>
+            <if test="featureId != null">feature_id,</if>
+            <if test="germplasmId != null">germplasm_id,</if>
+            <if test="tissueId != null">tissue_id,</if>
+            <if test="status != null">status,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="expressionId != null">#{expressionId},</if>
+            <if test="expressionValue != null">#{expressionValue},</if>
+            <if test="expressionUnit != null">#{expressionUnit},</if>
+            <if test="analysisId != null">#{analysisId},</if>
+            <if test="environmentId != null">#{environmentId},</if>
+            <if test="featureId != null">#{featureId},</if>
+            <if test="germplasmId != null">#{germplasmId},</if>
+            <if test="tissueId != null">#{tissueId},</if>
+            <if test="status != null">#{status},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateExpression" parameterType="Expression">
+        update expression
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="expressionValue != null">expression_value = #{expressionValue},</if>
+            <if test="expressionUnit != null">expression_unit = #{expressionUnit},</if>
+            <if test="analysisId != null">analysis_id = #{analysisId},</if>
+            <if test="environmentId != null">environment_id = #{environmentId},</if>
+            <if test="featureId != null">feature_id = #{featureId},</if>
+            <if test="germplasmId != null">germplasm_id = #{germplasmId},</if>
+            <if test="tissueId != null">tissue_id = #{tissueId},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where expression_id = #{expressionId}
+    </update>
+
+    <delete id="deleteExpressionByExpressionId" parameterType="Long">
+        delete from expression where expression_id = #{expressionId}
+    </delete>
+
+    <delete id="deleteExpressionByExpressionIds" parameterType="String">
+        delete from expression where expression_id in 
+        <foreach item="expressionId" collection="array" open="(" separator="," close=")">
+            #{expressionId}
+        </foreach>
+    </delete>
+
+        <select id="selectMapExpression" parameterType="int" resultType="Expression">
+            select t.tissue_desc,e.expression_value from tissue t,expression e where t.tissue_id = e.tissue_id AND e.feature_id = #{feature_id}
+        </select>
+
+        <select id="selectmultiExpressionListTissue" parameterType="com.ruoyi.zeamap.vo.ExpressionVo" resultType="com.ruoyi.zeamap.domain.Expression">
+           select * from expression e
+            inner join environment env on env.environment_id = e.environment_id
+            inner join analysis a on a.analysis_id = e.analysis_id
+            inner join germplasm g on g.germplasm_id =e.germplasm_id
+            inner join tissue t on t.tissue_id =e.tissue_id
+            inner join feature f on f.feature_id = e.feature_id
+            inner join feature_dbxref fd on fd.feature_id = f.feature_id
+            inner join dbxref dbf on dbf.dbxref_id = fd.dbxref_id
+            inner join population_dbxref pd on pd.dbxref_id = dbf.dbxref_id
+            inner join population pop on pop.population_id = pd.population_id
+            inner join subgroup_dbxref sd on sd.dbxref_id = dbf.dbxref_id
+            inner join subgroup sub on sub.subgroup_id = sd.subgroup_id
+            <where>
+            <if test="analysis!=null">and a.description= #{analysis}</if>
+            <if test="environment!=null">and env.environment_condition= #{environment}</if>
+            <if test="germplasm!=null">and g.name= #{germplasm}</if>
+            <if test="tissue!=null">and t.tissue_position= #{tissue}</if>
+            <if test="population!=null">and pop.alias= #{population}</if>
+            <if test="subgroup!=null">and sub.name= #{subgroup}</if>
+            <if test="version !=null">and dbf.version = #{version}</if>
+            <if test="reference !=null">and dbf.accession = #{reference}</if>
+            <if test="geneIds !=null">and f.uniquename in
+             <foreach collection="geneIds" index="index" item="geneId" open="(" separator="," close=")">
+                 #{geneId}
+            </foreach>
+             </if>
+             <if test="selects !=null">and t.tissue_desc in
+             <foreach collection="selects" index="index" item="select" open="(" separator="," close=")">
+                 #{select}
+            </foreach>
+             </if>
+            </where>
+
+        </select>
+
+        <select id="selectmultiExpressionListGermplasm" parameterType="com.ruoyi.zeamap.vo.ExpressionVo" resultType="com.ruoyi.zeamap.domain.Expression">
+            select * from expression e
+            inner join environment env on env.environment_id = e.environment_id
+            inner join analysis a on a.analysis_id = e.analysis_id
+            inner join germplasm g on g.germplasm_id =e.germplasm_id
+            inner join tissue t on t.tissue_id =e.tissue_id
+            inner join feature f on f.feature_id = e.feature_id
+            inner join feature_dbxref fd on fd.feature_id = f.feature_id
+            inner join dbxref dbf on dbf.dbxref_id = fd.dbxref_id
+            inner join population_dbxref pd on pd.dbxref_id = dbf.dbxref_id
+            inner join population pop on pop.population_id = pd.population_id
+            inner join subgroup_dbxref sd on sd.dbxref_id = dbf.dbxref_id
+            inner join subgroup sub on sub.subgroup_id = sd.subgroup_id
+            <where>
+            <if test="analysis!=null">and a.description= #{analysis}</if>
+            <if test="environment!=null">and env.environment_condition= #{environment}</if>
+            <if test="germplasm!=null">and g.name= #{germplasm}</if>
+            <if test="tissue!=null">and t.tissue_position= #{tissue}</if>
+            <if test="population!=null">and pop.alias= #{population}</if>
+            <if test="subgroup!=null">and sub.name= #{subgroup}</if>
+            <if test="version !=null">and dbf.version = #{version}</if>
+            <if test="reference !=null">and dbf.accession = #{reference}</if>
+            <if test="geneIds !=null">and f.uniquename in
+             <foreach collection="geneIds" index="index" item="geneId" open="(" separator="," close=")">
+                 #{geneId}
+            </foreach>
+             </if>
+             <if test="selects !=null">and g.name in
+             <foreach collection="selects" index="index" item="select" open="(" separator="," close=")">
+                 #{select}
+            </foreach>
+             </if>
+            </where>
+
+        </select>
+
+
+        <select id="selectmultiExpressionListEnvironment" parameterType="com.ruoyi.zeamap.vo.ExpressionVo" resultType="com.ruoyi.zeamap.domain.Expression">
+               select * from expression e
+            inner join environment env on env.environment_id = e.environment_id
+            inner join analysis a on a.analysis_id = e.analysis_id
+            inner join germplasm g on g.germplasm_id =e.germplasm_id
+            inner join tissue t on t.tissue_id =e.tissue_id
+            inner join feature f on f.feature_id = e.feature_id
+            inner join feature_dbxref fd on fd.feature_id = f.feature_id
+            inner join dbxref dbf on dbf.dbxref_id = fd.dbxref_id
+            inner join population_dbxref pd on pd.dbxref_id = dbf.dbxref_id
+            inner join population pop on pop.population_id = pd.population_id
+            inner join subgroup_dbxref sd on sd.dbxref_id = dbf.dbxref_id
+            inner join subgroup sub on sub.subgroup_id = sd.subgroup_id
+            <where>
+            <if test="analysis!=null">and a.description= #{analysis}</if>
+            <if test="environment!=null">and env.environment_condition= #{environment}</if>
+            <if test="germplasm!=null">and g.name= #{germplasm}</if>
+            <if test="tissue!=null">and t.tissue_position= #{tissue}</if>
+            <if test="population!=null">and pop.alias= #{population}</if>
+            <if test="subgroup!=null">and sub.name= #{subgroup}</if>
+            <if test="version !=null">and dbf.version = #{version}</if>
+            <if test="reference !=null">and dbf.accession = #{reference}</if>
+            <if test="geneIds !=null">and f.uniquename in
+             <foreach collection="geneIds" index="index" item="geneId" open="(" separator="," close=")">
+                 #{geneId}
+            </foreach>
+             </if>
+             <if test="selects !=null">and env.environment_desc in
+             <foreach collection="selects" index="index" item="select" open="(" separator="," close=")">
+                 #{select}
+            </foreach>
+             </if>
+            </where>
+        </select>
+
+
+</mapper>

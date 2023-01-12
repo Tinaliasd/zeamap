@@ -62,8 +62,17 @@ public interface IFeatureService
      */
     public int deleteFeatureByFeatureId(Long featureId);
 
-    public int selectId(String uniquename);
+    /**
+     * uniquename查找id ,首先判断有没有 然后再连表
+     * @param uniquename
+     * @return
+     */
+    public Long selectId(String uniquename);
 
 
     public Map<String, String> selectByUniquenameToExpression(String uniquename);
+
+
+    public Map<String, String> selectByUniquenameToTissue(String unquename);
+
 }

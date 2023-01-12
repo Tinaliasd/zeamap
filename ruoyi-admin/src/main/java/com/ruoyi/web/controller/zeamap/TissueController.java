@@ -101,4 +101,15 @@ public class TissueController extends BaseController
     {
         return toAjax(tissueService.deleteTissueByTissueIds(tissueIds));
     }
+
+    /**
+     * 5.2 Multi expression viewer Filter选中Tissue中Selector 所需的信息
+     * @return
+     */
+    @GetMapping("/multi")
+    public AjaxResult selectorClassDesc(){
+
+        return AjaxResult.success(tissueService.SelectorClassDesc());
+    }
+
 }

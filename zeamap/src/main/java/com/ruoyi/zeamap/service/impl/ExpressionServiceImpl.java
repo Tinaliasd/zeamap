@@ -2,6 +2,7 @@ package com.ruoyi.zeamap.service.impl;
 
 import java.util.List;
 import com.ruoyi.common.utils.DateUtils;
+import com.ruoyi.zeamap.vo.ExpressionVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.zeamap.mapper.ExpressionMapper;
@@ -19,6 +20,8 @@ public class ExpressionServiceImpl implements IExpressionService
 {
     @Autowired
     private ExpressionMapper expressionMapper;
+
+
 
     /**
      * 查询基因表达量查询
@@ -93,4 +96,20 @@ public class ExpressionServiceImpl implements IExpressionService
     {
         return expressionMapper.deleteExpressionByExpressionId(expressionId);
     }
+    @Override
+    public List<Expression> selectmultiExpressionList(ExpressionVo expressionVo) {
+        List<Expression> expressions = null;
+        if(expressionVo.getFlag() == 1){
+           expressions = expressionMapper.selectmultiExpressionListTissue(expressionVo);
+
+        } else if (expressionVo.getFlag() == 2) {
+           expressions = expressionMapper.selectmultiExpressionListGermplasm(expressionVo);
+
+        }else{
+            expressions = expressionMapper.selectmultiExpressionListEnvironment(expressionVo);
+
+        }
+        return expressions;
+    }
+
 }

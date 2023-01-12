@@ -62,7 +62,7 @@ public interface FeatureMapper
      */
     public int deleteFeatureByFeatureIds(Long[] featureIds);
 
-    public int selectByUniquename(String uniquename);
+    public Long selectByUniquename(String uniquename);
 
-    public List<Tissue> selectMapTissue(int feature_id);
+
 }
