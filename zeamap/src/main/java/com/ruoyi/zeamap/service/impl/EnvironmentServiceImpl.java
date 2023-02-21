@@ -105,9 +105,9 @@ public class EnvironmentServiceImpl implements IEnvironmentService
         List<Environment> environments  = environmentMapper.selectMultiSelectorClassDesc();
 
         Map<String, List<String>> env = new HashMap<>();
-
+        //与Tissue 中同理
         for (Environment environment:environments) {
-            if (env.get(environment.getEnvironmentClass())!=null){
+            if (env.get(environment.getEnvironmentClass())==null){
                 List<String> envDesc = new ArrayList<>();
                 envDesc.add(environment.getEnvironmentDesc());
                 env.put(environment.getEnvironmentClass(), envDesc);
@@ -116,8 +116,6 @@ public class EnvironmentServiceImpl implements IEnvironmentService
                 envDes.add(environment.getEnvironmentDesc());
             }
         }
-
-
         return env;
     }
 }

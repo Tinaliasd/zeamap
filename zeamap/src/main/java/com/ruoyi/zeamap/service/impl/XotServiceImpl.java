@@ -104,7 +104,6 @@ public class XotServiceImpl implements IXotService
         for (Xot x:xots) {
             xotVos.add(new XotVo(x.getXotId(), x.getXotUid(), x.getCategory(), x.getType(), x.getAnalysis().getName(),x.getName(), x.getLocation(), x.getTraitDateLoc(), x.getYear(), x.getTissue()));
         }
-
         return xotVos;
     }
 

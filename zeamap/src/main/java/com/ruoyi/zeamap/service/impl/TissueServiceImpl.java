@@ -106,9 +106,11 @@ public class TissueServiceImpl implements ITissueService
 
         Map<String, List<String>> t = new HashMap<>();
 
+        //判断map 中有没有这个key的值,如果没有就新建一个,如果有就拿出来加到List中
         for (Tissue tissue:tissues) {
-            if (t.get(tissue.getTissueClass())!=null){
+            if (t.get(tissue.getTissueClass())==null){
                 List<String> envDesc = new ArrayList<>();
+
                 envDesc.add(tissue.getTissueDesc());
                 t.put(tissue.getTissueClass(), envDesc);
             }else{

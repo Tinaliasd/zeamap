@@ -107,7 +107,6 @@ public class ExpressionServiceImpl implements IExpressionService
 
         }else{
             expressions = expressionMapper.selectmultiExpressionListEnvironment(expressionVo);
-
         }
         return expressions;
     }

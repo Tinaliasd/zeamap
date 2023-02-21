@@ -19,15 +19,10 @@ public class ExpressionVo {
 
     private List<String> geneIds;
 
-    public String getEnvironment() {
-        return environment;
-    }
-
-    public void setEnvironment(String environment) {
-        this.environment = environment;
-    }
-
     private String analysis;
+
+    private int flag;//判断是哪一种
+
 
     private String environment;
 
@@ -42,11 +37,19 @@ public class ExpressionVo {
     //Analysis
     private String subgroup;
 
-    private int flag;//判断是哪一种
 
-    private Map<String, List<String>> selector;
 
     private List<String> selects;
+
+    public String getEnvironment() {
+        return environment;
+    }
+
+    public void setEnvironment(String environment) {
+        this.environment = environment;
+    }
+
+
 
     public List<String> getSelects() {
         return selects;
@@ -128,13 +131,7 @@ public class ExpressionVo {
         this.flag = flag;
     }
 
-    public Map<String, List<String>> getSelector() {
-        return selector;
-    }
 
-    public void setSelector(Map<String, List<String>> selector) {
-        this.selector = selector;
-    }
 
     public ExpressionVo(String reference, String version, List<String> geneIds, String analysis,
                         String environment, String germplasm, String population, String tissue,
@@ -149,7 +146,6 @@ public class ExpressionVo {
         this.tissue = tissue;
         this.subgroup = subgroup;
         this.flag = flag;
-        this.selector = selector;
         this.selects = selects;
     }
 
@@ -166,7 +162,6 @@ public class ExpressionVo {
                 .append("tissue",getTissue())
                 .append("subgroup",getSubgroup())
                 .append("flag",getFlag())
-                .append("selector",getSelector())
                 .append("selects",getSelects())
                 .toString();
     }

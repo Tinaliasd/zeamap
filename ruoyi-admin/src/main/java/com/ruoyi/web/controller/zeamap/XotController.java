@@ -99,7 +99,18 @@ public class XotController extends BaseController
     }
 
 
-
+    /**
+     * 5.4的接口
+     * @param category
+     * @param type
+     * @param analysis
+     * @param name
+     * @param location
+     * @param year
+     * @param tissue
+     * @param traitDateLoc
+     * @return
+     */
     @GetMapping("/xots")
     public TableDataInfo XotFind(@RequestParam(required = false) String category,@RequestParam(required = false) String type,@RequestParam(required = false) String analysis,
                                  @RequestParam(required = false) String name,@RequestParam(required = false) String location,@RequestParam(required = false) String year,

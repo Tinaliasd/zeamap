@@ -94,7 +94,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         </foreach>
     </delete>
 
-    <select id="selectMultiSelectorClassDesc" resultType="com.ruoyi.zeamap.domain.Environment">
+    <select id="selectMultiSelectorClassDesc" resultMap="EnvironmentResult">
         select env.environment_class,env.environment_desc from environment env
     </select>
 

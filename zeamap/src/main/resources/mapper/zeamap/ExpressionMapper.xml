@@ -19,10 +19,46 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="updateBy"    column="update_by"    />
         <result property="updateTime"    column="update_time"    />
         <result property="remark"    column="remark"    />
-        <association property="analysis" javaType="analysis" resultMap="com.ruoyi.zeamap.mapper.AnalysisMapper.AnalysisResult"></association>
-        <association property="environment" javaType="environment" resultMap="com.ruoyi.zeamap.mapper.EnvironmentMapper.EnvironmentResult"></association>
+        <association property="analysis" javaType="analysis">
+            <result property="analysisId"    column="analysis_id"    />
+            <result property="name"    column="name"    />
+            <result property="description"    column="description"    />
+            <result property="program"    column="program"    />
+            <result property="programversion"    column="programversion"    />
+            <result property="doi"    column="doi"    />
+            <result property="url"    column="url"    />
+            <result property="source"    column="source"    />
+            <result property="dbxrefId"    column="dbxref_id"    />
+            <result property="populationId"    column="population_id"    />
+        </association>
+        <association property="environment" javaType="environment">
+            <result property="environmentId"    column="environment_id"    />
+            <result property="name"    column="name"    />
+            <result property="environmentClass"    column="environment_class"    />
+            <result property="environmentCondition"    column="environment_condition"    />
+            <result property="environmentDesc"    column="environment_desc"    />
+            <result property="status"    column="status"    />
+            <result property="createBy"    column="create_by"    />
+            <result property="createTime"    column="create_time"    />
+            <result property="updateBy"    column="update_by"    />
+            <result property="updateTime"    column="update_time"    />
+            <result property="remark"    column="remark"    />
+        </association>
         <association property="feature" javaType="feature" resultMap="com.ruoyi.zeamap.mapper.FeatureMapper.FeatureResult"></association>
-        <association property="germplasm" javaType="germplasm" resultMap="com.ruoyi.zeamap.mapper.GermplasmMapper.GermplasmResult"></association>
+        <association property="germplasm" javaType="germplasm">
+            <result property="germplasmId"    column="germplasm_id"    />
+            <result property="name"    column="name"    />
+            <result property="genus"    column="genus"    />
+            <result property="species"    column="species"    />
+            <result property="commonName"    column="common_name"    />
+            <result property="comment"    column="comment"    />
+            <result property="groupId"    column="group_id"    />
+            <result property="populationId"    column="population_id"    />
+            <result property="latitude"    column="latitude"    />
+            <result property="longtitude"    column="longtitude"    />
+            <result property="ngbId"    column="ngb_id"    />
+            <result property="origin"    column="origin"    />
+        </association>
         <association property="tissue" javaType="tissue" resultMap="com.ruoyi.zeamap.mapper.TissueMapper.TissueResult"></association>
     </resultMap>
 
@@ -38,7 +74,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="selectExpressionList" parameterType="Expression" resultMap="ExpressionResult">
         <include refid="selectExpressionVo"/>
         <where>  
-            <if test="expressionValue != null  and expressionValue != ''"> and e.expression_value = #{expressionValue}</if>
+            <if test="expressionValue != null"> and e.expression_value = #{expressionValue}</if>
             <if test="expressionUnit != null  and expressionUnit != ''"> and e.expression_unit = #{expressionUnit}</if>
             <if test="analysisId != null "> and e.analysis_id = #{analysisId}</if>
             <if test="environmentId != null "> and e.environment_id = #{environmentId}</if>
@@ -121,11 +157,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         </foreach>
     </delete>
 
-        <select id="selectMapExpression" parameterType="int" resultType="Expression">
+        <select id="selectMapExpression" parameterType="int" resultMap="ExpressionResult">
             select t.tissue_desc,e.expression_value from tissue t,expression e where t.tissue_id = e.tissue_id AND e.feature_id = #{feature_id}
         </select>
 
-        <select id="selectmultiExpressionListTissue" parameterType="com.ruoyi.zeamap.vo.ExpressionVo" resultType="com.ruoyi.zeamap.domain.Expression">
+        <select id="selectmultiExpressionListTissue" parameterType="com.ruoyi.zeamap.vo.ExpressionVo" resultMap="ExpressionResult">
            select * from expression e
             inner join environment env on env.environment_id = e.environment_id
             inner join analysis a on a.analysis_id = e.analysis_id
@@ -161,7 +197,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
         </select>
 
-        <select id="selectmultiExpressionListGermplasm" parameterType="com.ruoyi.zeamap.vo.ExpressionVo" resultType="com.ruoyi.zeamap.domain.Expression">
+        <select id="selectmultiExpressionListGermplasm" parameterType="com.ruoyi.zeamap.vo.ExpressionVo" resultMap="ExpressionResult">
             select * from expression e
             inner join environment env on env.environment_id = e.environment_id
             inner join analysis a on a.analysis_id = e.analysis_id
@@ -198,7 +234,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         </select>
 
 
-        <select id="selectmultiExpressionListEnvironment" parameterType="com.ruoyi.zeamap.vo.ExpressionVo" resultType="com.ruoyi.zeamap.domain.Expression">
+        <select id="selectmultiExpressionListEnvironment" parameterType="com.ruoyi.zeamap.vo.ExpressionVo" resultMap="ExpressionResult">
                select * from expression e
             inner join environment env on env.environment_id = e.environment_id
             inner join analysis a on a.analysis_id = e.analysis_id

@@ -28,7 +28,7 @@ public class Expression extends BaseEntity
 
     /** 组织高亮值 */
     @Excel(name = "组织高亮值")
-    private String expressionValue;
+    private Double expressionValue;
 
     /** $column.columnComment */
     @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
@@ -113,12 +113,12 @@ public class Expression extends BaseEntity
     {
         return expressionId;
     }
-    public void setExpressionValue(String expressionValue)
+    public void setExpressionValue(Double expressionValue)
     {
         this.expressionValue = expressionValue;
     }
 
-    public String getExpressionValue()
+    public Double getExpressionValue()
     {
         return expressionValue;
     }

@@ -17,11 +17,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="longtitude"    column="longtitude"    />
         <result property="ngbId"    column="ngb_id"    />
         <result property="origin"    column="origin"    />
-        <association property="subgroup"/>
+        <association property="subgroup" javaType ="subgroup">
+            <result property="subgroupId"    column="subgroup_id"    />
+            <result property="name"    column="subgroup_name"    />
+            <result property="description"    column="description"    />
+            <result property="populationId"    column="population_id"    />
+        </association>
     </resultMap>
 
     <sql id="selectGermplasmVo">
-        select * from germplasm g
+        select g.*,s.subgroup_id,s.name as subgroup_name,s.description,s.population_id from germplasm g
         inner join subgroup s on s.subgroup_id = g.group_id
     </sql>
 
@@ -109,8 +114,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </delete>
     
 
-    <select id="SelectorSubGroupGermplasm" resultType="com.ruoyi.zeamap.domain.Germplasm">
-        select * from germplasm g
+    <select id="SelectorSubGroupGermplasm" resultMap="GermplasmResult">
+        select g.*,s.subgroup_id,s.name as subgroup_name,s.description,s.population_id from germplasm g
         inner join subgroup s on s.subgroup_id = g.group_id
     </select>
 

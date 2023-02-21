@@ -110,7 +110,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         select tissue_desc,tissue_svgclass from tissue where tissue_id in (select tissue_id from expression where feature_id = #{feature_id})
     </select>
 
-    <select id="selectMultiSelectorClassDesc" resultType="com.ruoyi.zeamap.domain.Tissue">
+    <select id="selectMultiSelectorClassDesc" resultMap="TissueResult">
         select t.tissue_class,t.tissue_desc from tissue t
     </select>
 

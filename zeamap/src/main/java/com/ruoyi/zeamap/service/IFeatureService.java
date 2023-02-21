@@ -73,6 +73,6 @@ public interface IFeatureService
     public Map<String, String> selectByUniquenameToExpression(String uniquename);
 
 
-    public Map<String, String> selectByUniquenameToTissue(String unquename);
+    public Map<String, Double> selectByUniquenameToTissue(String unquename);
 
 }

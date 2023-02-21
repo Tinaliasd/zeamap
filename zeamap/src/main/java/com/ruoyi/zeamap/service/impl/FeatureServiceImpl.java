@@ -130,7 +130,7 @@ public class FeatureServiceImpl implements IFeatureService
     }
 
 
-    public Map<String,String> selectByUniquenameToTissue(String unquename) {
+    public Map<String,Double> selectByUniquenameToTissue(String unquename) {
         Long featureId = selectId(unquename);
 
         if (featureId == null) {
@@ -138,7 +138,7 @@ public class FeatureServiceImpl implements IFeatureService
         }
         List<Expression> res = expressionMapper.selectMapExpression(featureId);
 
-        Map<String, String> expressMap = res.stream().collect(Collectors.toMap(item -> (item.getTissue().getTissueDesc()), item -> item.getExpressionValue()));
+        Map<String, Double> expressMap = res.stream().collect(Collectors.toMap(item -> (item.getTissue().getTissueDesc()), item -> item.getExpressionValue()));
 
         return expressMap;
     }

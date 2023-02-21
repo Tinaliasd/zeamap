@@ -101,11 +101,11 @@ public class GermplasmServiceImpl implements IGermplasmService
     public Map<String, List<String>> SelectorSubGroupGermplasm() {
         List<Germplasm> germplasms = germplasmMapper.SelectorSubGroupGermplasm();
 
-        //组合成一个key 对应多个value
+        //与Tissue 中同理
         Map<String, List<String>> g = new HashMap<>();
 
         for (Germplasm germplasm:germplasms) {
-            if (g.get(germplasm.getSubgroup().getName())!=null){
+            if (g.get(germplasm.getSubgroup().getName())==null){
                 List<String> germNames = new ArrayList<>();
                 germNames.add(germplasm.getName());
                 g.put(germplasm.getSubgroup().getName(), germNames);
