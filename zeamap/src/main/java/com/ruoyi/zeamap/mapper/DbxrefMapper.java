@@ -58,4 +58,6 @@ public interface DbxrefMapper
      * @return 结果
      */
     public int deleteDbxrefByDbxrefIds(Long[] dbxrefIds);
+
+    public List<String> selectDbxrefReference();
 }

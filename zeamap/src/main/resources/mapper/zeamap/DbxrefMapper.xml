@@ -30,7 +30,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <include refid="selectDbxrefVo"/>
         where dbxref_id = #{dbxrefId}
     </select>
-        
+
+
+
+    <select id="selectDbxrefReference" resultType="java.lang.String">
+        select accession from dbxref
+    </select>
+
+
     <insert id="insertDbxref" parameterType="Dbxref" useGeneratedKeys="true" keyProperty="dbxrefId">
         insert into dbxref
         <trim prefix="(" suffix=")" suffixOverrides=",">

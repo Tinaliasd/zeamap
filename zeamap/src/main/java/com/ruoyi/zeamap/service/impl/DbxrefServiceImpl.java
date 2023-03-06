@@ -90,4 +90,10 @@ public class DbxrefServiceImpl implements IDbxrefService
     {
         return dbxrefMapper.deleteDbxrefByDbxrefId(dbxrefId);
     }
+
+    @Override
+    public List<String> selectAllReference() {
+        List<String> references = dbxrefMapper.selectDbxrefReference();
+        return references;
+    }
 }

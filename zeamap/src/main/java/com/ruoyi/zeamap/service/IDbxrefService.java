@@ -58,4 +58,6 @@ public interface IDbxrefService
      * @return 结果
      */
     public int deleteDbxrefByDbxrefId(Long dbxrefId);
+
+    public List<String> selectAllReference();
 }

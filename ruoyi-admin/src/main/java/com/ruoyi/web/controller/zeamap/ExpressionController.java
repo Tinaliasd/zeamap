@@ -1,8 +1,11 @@
 package com.ruoyi.web.controller.zeamap;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.servlet.http.HttpServletResponse;
 
+import com.ruoyi.zeamap.service.IDbxrefService;
 import com.ruoyi.zeamap.vo.ExpressionVo;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +39,8 @@ public class ExpressionController extends BaseController
     @Autowired
     private IExpressionService expressionService;
 
+    @Autowired
+    private IDbxrefService dbxrefService;
     /**
      * 查询基因表达量查询列表
      */
@@ -114,6 +119,18 @@ public class ExpressionController extends BaseController
         List<Expression> list = expressionService.selectmultiExpressionList(expressionVo);
         return getDataTable(list);
     }
+
+
+    @GetMapping("/dropBox")
+    public AjaxResult Button(){
+
+        List<String> references = dbxrefService.selectAllReference();
+        Map<String,List<String>> res =new HashMap<>();
+
+        res.put("references", references);
+        return AjaxResult.success(res);
+    }
+
 
 
 
