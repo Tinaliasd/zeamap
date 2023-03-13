@@ -67,4 +67,20 @@ public interface ExpressionMapper
     public List<Expression> selectmultiExpressionListEnvironment(ExpressionVo expressionVo);
 
 
+    public List<String> selectExpressionReference();
+
+
+    public List<String> selectAnalysis();
+
+    public List<String> selectExpressionGermplasm();
+
+    public List<String> selectExpressionEnvironment();
+
+    public List<String> selectExpressionTissue();
+
+    public List<String> selectExpressionPopulation();
+
+    public List<String> selectExpressionSubgroup();
+
+    List<String> selectExpressionVersion(String reference);
 }

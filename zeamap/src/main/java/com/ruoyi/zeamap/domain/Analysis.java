@@ -1,15 +1,15 @@
 package com.ruoyi.zeamap.domain;
 
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
-import com.ruoyi.common.annotation.Excel;
-import com.ruoyi.common.core.domain.BaseEntity;
+        import org.apache.commons.lang3.builder.ToStringBuilder;
+        import org.apache.commons.lang3.builder.ToStringStyle;
+        import com.ruoyi.common.annotation.Excel;
+        import com.ruoyi.common.core.domain.BaseEntity;
 
 /**
  * analysis对象 analysis
- * 
+ *
  * @author ruoyi
- * @date 2023-01-08
+ * @date 2023-03-13
  */
 public class Analysis extends BaseEntity
 {
@@ -28,135 +28,122 @@ public class Analysis extends BaseEntity
 
     /** $column.columnComment */
     @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
-    private String program;
+    private Long dbxrefId;
 
     /** $column.columnComment */
     @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
-    private String programversion;
+    private Long populationId;
 
     /** $column.columnComment */
     @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
-    private String doi;
+    private String detailed;
 
     /** $column.columnComment */
     @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
-    private String url;
+    private String methods;
 
     /** $column.columnComment */
     @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
-    private String source;
+    private String omics;
 
     /** $column.columnComment */
     @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
-    private String dbxrefId;
+    private String reference;
 
-    /** $column.columnComment */
-    private String populationId;
-
-    public void setAnalysisId(Long analysisId) 
+    public void setAnalysisId(Long analysisId)
     {
         this.analysisId = analysisId;
     }
 
-    public Long getAnalysisId() 
+    public Long getAnalysisId()
     {
         return analysisId;
     }
-    public void setName(String name) 
+    public void setName(String name)
     {
         this.name = name;
     }
 
-    public String getName() 
+    public String getName()
     {
         return name;
     }
-    public void setDescription(String description) 
+    public void setDescription(String description)
     {
         this.description = description;
     }
 
-    public String getDescription() 
+    public String getDescription()
     {
         return description;
     }
-    public void setProgram(String program) 
-    {
-        this.program = program;
-    }
-
-    public String getProgram() 
-    {
-        return program;
-    }
-    public void setProgramversion(String programversion) 
-    {
-        this.programversion = programversion;
-    }
-
-    public String getProgramversion() 
-    {
-        return programversion;
-    }
-    public void setDoi(String doi) 
-    {
-        this.doi = doi;
-    }
-
-    public String getDoi() 
-    {
-        return doi;
-    }
-    public void setUrl(String url) 
-    {
-        this.url = url;
-    }
-
-    public String getUrl() 
-    {
-        return url;
-    }
-    public void setSource(String source) 
-    {
-        this.source = source;
-    }
-
-    public String getSource() 
-    {
-        return source;
-    }
-    public void setDbxrefId(String dbxrefId) 
+    public void setDbxrefId(Long dbxrefId)
     {
         this.dbxrefId = dbxrefId;
     }
 
-    public String getDbxrefId() 
+    public Long getDbxrefId()
     {
         return dbxrefId;
     }
-    public void setPopulationId(String populationId) 
+    public void setPopulationId(Long populationId)
     {
         this.populationId = populationId;
     }
 
-    public String getPopulationId() 
+    public Long getPopulationId()
     {
         return populationId;
+    }
+    public void setDetailed(String detailed)
+    {
+        this.detailed = detailed;
+    }
+
+    public String getDetailed()
+    {
+        return detailed;
+    }
+    public void setMethods(String methods)
+    {
+        this.methods = methods;
+    }
+
+    public String getMethods()
+    {
+        return methods;
+    }
+    public void setOmics(String omics)
+    {
+        this.omics = omics;
+    }
+
+    public String getOmics()
+    {
+        return omics;
+    }
+    public void setReference(String reference)
+    {
+        this.reference = reference;
+    }
+
+    public String getReference()
+    {
+        return reference;
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
-            .append("analysisId", getAnalysisId())
-            .append("name", getName())
-            .append("description", getDescription())
-            .append("program", getProgram())
-            .append("programversion", getProgramversion())
-            .append("doi", getDoi())
-            .append("url", getUrl())
-            .append("source", getSource())
-            .append("dbxrefId", getDbxrefId())
-            .append("populationId", getPopulationId())
-            .toString();
+                .append("analysisId", getAnalysisId())
+                .append("name", getName())
+                .append("description", getDescription())
+                .append("dbxrefId", getDbxrefId())
+                .append("populationId", getPopulationId())
+                .append("detailed", getDetailed())
+                .append("methods", getMethods())
+                .append("omics", getOmics())
+                .append("reference", getReference())
+                .toString();
     }
 }

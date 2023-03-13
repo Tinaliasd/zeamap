@@ -9,14 +9,7 @@ import com.ruoyi.zeamap.service.IDbxrefService;
 import com.ruoyi.zeamap.vo.ExpressionVo;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import com.ruoyi.common.annotation.Log;
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
@@ -112,6 +105,7 @@ public class ExpressionController extends BaseController
 
     @PreAuthorize("@ss.hasPermi('zeamap:expression:list')")
     @PostMapping("/multi")
+    //5.2 的接口
     public TableDataInfo multiExpression (@RequestBody ExpressionVo expressionVo)
     {
 
@@ -121,15 +115,27 @@ public class ExpressionController extends BaseController
     }
 
 
-    @GetMapping("/dropBox")
-    public AjaxResult Button(){
+    @GetMapping("/DownMenu")
+    public AjaxResult DownMenu(){
+        Map<String, List<String>> res = expressionService.selectDownMenuAllData();
 
-        List<String> references = dbxrefService.selectAllReference();
-        Map<String,List<String>> res =new HashMap<>();
-
-        res.put("references", references);
         return AjaxResult.success(res);
     }
+
+    @GetMapping("/reference")
+    public AjaxResult Reference() {
+        List<String> res = expressionService.findAllReference();
+        return AjaxResult.success(res);
+    }
+
+    @GetMapping("/version")
+    public AjaxResult version(@RequestParam String reference) {
+        List<String> res = expressionService.findAllVersion(reference);
+
+        return AjaxResult.success(res);
+    }
+
+
 
 
 

@@ -67,4 +67,20 @@ public interface XotMapper
      */
 
     List<Xot> selectFull(Xot xot);
+
+    List<String> selectXotAllCategory();
+
+    List<String> selectXotAllType();
+
+    List<String> selectXotAllAnalysis();
+
+    List<String> selectXotAllLocation();
+
+    List<String> selectXotAllTraitDateLoc();
+
+    List<String> selectXotAllTissue();
+
+    List<String> selectXotAllYear();
+
+    List<String> selectXotAllName();
 }

@@ -3,35 +3,34 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.zeamap.mapper.AnalysisMapper">
-    
+
     <resultMap type="Analysis" id="AnalysisResult">
         <result property="analysisId"    column="analysis_id"    />
         <result property="name"    column="name"    />
         <result property="description"    column="description"    />
-        <result property="program"    column="program"    />
-        <result property="programversion"    column="programversion"    />
-        <result property="doi"    column="doi"    />
-        <result property="url"    column="url"    />
-        <result property="source"    column="source"    />
         <result property="dbxrefId"    column="dbxref_id"    />
         <result property="populationId"    column="population_id"    />
+        <result property="detailed"    column="detailed"    />
+        <result property="methods"    column="methods"    />
+        <result property="omics"    column="omics"    />
+        <result property="reference"    column="reference"    />
     </resultMap>
 
     <sql id="selectAnalysisVo">
-        select analysis_id, name, description, program, programversion, doi, url, source, dbxref_id, population_id from analysis
+        select analysis_id, name, description, dbxref_id, population_id, detailed, methods, omics, reference from analysis
     </sql>
 
     <select id="selectAnalysisList" parameterType="Analysis" resultMap="AnalysisResult">
         <include refid="selectAnalysisVo"/>
-        <where>  
+        <where>
             <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
-            <if test="description != null  and description != ''"> and description = #{description}</if>
-            <if test="program != null  and program != ''"> and program = #{program}</if>
-            <if test="programversion != null  and programversion != ''"> and programversion = #{programversion}</if>
-            <if test="doi != null  and doi != ''"> and doi = #{doi}</if>
-            <if test="url != null  and url != ''"> and url = #{url}</if>
-            <if test="source != null  and source != ''"> and source = #{source}</if>
-            <if test="dbxrefId != null  and dbxrefId != ''"> and dbxref_id = #{dbxrefId}</if>
+            <if test="description != null  and description != ''"> and description like concat('%', #{description}, '%')</if>
+            <if test="dbxrefId != null "> and dbxref_id = #{dbxrefId}</if>
+            <if test="populationId != null "> and population_id = #{populationId}</if>
+            <if test="detailed != null  and detailed != ''"> and detailed like concat('%', #{detailed}, '%')</if>
+            <if test="methods != null  and methods != ''"> and methods like concat('%', #{methods}, '%')</if>
+            <if test="omics != null  and omics != ''"> and omics like concat('%', #{omics}, '%')</if>
+            <if test="reference != null  and reference != ''"> and reference like concat('%', #{reference}, '%')</if>
         </where>
     </select>
     
@@ -39,33 +38,31 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <include refid="selectAnalysisVo"/>
         where analysis_id = #{analysisId}
     </select>
-        
+
     <insert id="insertAnalysis" parameterType="Analysis">
         insert into analysis
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="analysisId != null">analysis_id,</if>
             <if test="name != null">name,</if>
             <if test="description != null">description,</if>
-            <if test="program != null">program,</if>
-            <if test="programversion != null">programversion,</if>
-            <if test="doi != null">doi,</if>
-            <if test="url != null">url,</if>
-            <if test="source != null">source,</if>
             <if test="dbxrefId != null">dbxref_id,</if>
             <if test="populationId != null">population_id,</if>
-         </trim>
+            <if test="detailed != null">detailed,</if>
+            <if test="methods != null">methods,</if>
+            <if test="omics != null">omics,</if>
+            <if test="reference != null">reference,</if>
+        </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="analysisId != null">#{analysisId},</if>
             <if test="name != null">#{name},</if>
             <if test="description != null">#{description},</if>
-            <if test="program != null">#{program},</if>
-            <if test="programversion != null">#{programversion},</if>
-            <if test="doi != null">#{doi},</if>
-            <if test="url != null">#{url},</if>
-            <if test="source != null">#{source},</if>
             <if test="dbxrefId != null">#{dbxrefId},</if>
             <if test="populationId != null">#{populationId},</if>
-         </trim>
+            <if test="detailed != null">#{detailed},</if>
+            <if test="methods != null">#{methods},</if>
+            <if test="omics != null">#{omics},</if>
+            <if test="reference != null">#{reference},</if>
+        </trim>
     </insert>
 
     <update id="updateAnalysis" parameterType="Analysis">
@@ -73,13 +70,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <trim prefix="SET" suffixOverrides=",">
             <if test="name != null">name = #{name},</if>
             <if test="description != null">description = #{description},</if>
-            <if test="program != null">program = #{program},</if>
-            <if test="programversion != null">programversion = #{programversion},</if>
-            <if test="doi != null">doi = #{doi},</if>
-            <if test="url != null">url = #{url},</if>
-            <if test="source != null">source = #{source},</if>
             <if test="dbxrefId != null">dbxref_id = #{dbxrefId},</if>
             <if test="populationId != null">population_id = #{populationId},</if>
+            <if test="detailed != null">detailed = #{detailed},</if>
+            <if test="methods != null">methods = #{methods},</if>
+            <if test="omics != null">omics = #{omics},</if>
+            <if test="reference != null">reference = #{reference},</if>
         </trim>
         where analysis_id = #{analysisId}
     </update>
@@ -89,9 +85,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </delete>
 
     <delete id="deleteAnalysisByAnalysisIds" parameterType="String">
-        delete from analysis where analysis_id in 
+        delete from analysis where analysis_id in
         <foreach item="analysisId" collection="array" open="(" separator="," close=")">
             #{analysisId}
         </foreach>
     </delete>
 </mapper>
+

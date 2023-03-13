@@ -12,6 +12,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="name"    column="name"    />
         <result property="xotUid"    column="xot_uid"    />
         <result property="analysisId"    column="analysis_id"    />
+        <result property="crossrefid"    column="crossrefid"    />
+        <result property="crossreflink"    column="crossreflink"    />
+        <result property="description"    column="description"    />
+        <result property="mesuredetail"    column="mesuredetail"    />
+        <result property="traitdetail"    column="traitdetail"    />
+<!--        返回行转列额外加的数据段-->
         <result property="location" column="location"/>
         <result property="tissue" column="tissue"/>
         <result property="traitDateLoc" column="traitDateLoc"/>
@@ -21,21 +27,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <!--            可能会有点问题,有同名列-->
             <result property="name"    column="aname"    />
             <result property="description"    column="description"    />
-            <result property="program"    column="program"    />
-            <result property="programversion"    column="programversion"    />
-            <result property="doi"    column="doi"    />
-            <result property="url"    column="url"    />
-            <result property="source"    column="source"    />
             <result property="dbxrefId"    column="dbxref_id"    />
             <result property="populationId"    column="population_id"    />
+            <result property="detailed"    column="detailed"    />
+            <result property="methods"    column="methods"    />
+            <result property="omics"    column="omics"    />
+            <result property="reference"    column="reference"    />
         </association>
     </resultMap>
 
     <sql id="selectXotVo">
         select xot.*,
                 a.name as aname, a.description,
-               a.program, a.programversion, a.doi,
-               a.url, a.source, a.dbxref_id, a.population_id
+               a.reference, a.omics,
+               a.methods, a.detailed, a.dbxref_id, a.population_id
                 from xot left join analysis a on xot.analysis_id = a.analysis_id
     </sql>
 
@@ -89,6 +94,49 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="year != null  and year != ''"> and tt.year = #{year}</if>
             <if test="tissue != null  and tissue != ''"> and tt.tissue = #{tissue}</if>
         </where>
+    </select>
+
+
+<!--    下拉菜单查询-->
+
+
+    <select id="selectXotAllCategory" resultType="java.lang.String">
+        select DISTINCT category from xot;
+    </select>
+    <select id="selectXotAllType" resultType="java.lang.String">
+        select DISTINCT type from xot;
+    </select>
+
+    <select id="selectXotAllName" resultType="java.lang.String">
+        select DISTINCT description from xot;
+    </select>
+
+    <select id="selectXotAllAnalysis" resultType="java.lang.String">
+        select DISTINCT name from analysis;
+    </select>
+
+
+    <select id="selectXotAllLocation" resultType="java.lang.String">
+        select DISTINCT mut.mutable_condition
+        from mutable mut
+        where mut.mutable_class = 'Location';
+
+    </select>
+
+    <select id="selectXotAllTraitDateLoc" resultType="java.lang.String">
+        select DISTINCT mut.mutable_condition
+        from mutable mut
+        where mut.mutable_class = 'TraitDateLoc';
+    </select>
+    <select id="selectXotAllTissue" resultType="java.lang.String">
+        select DISTINCT mut.mutable_condition
+        from mutable mut
+        where mut.mutable_class = 'Tissue';
+    </select>
+    <select id="selectXotAllYear" resultType="java.lang.String">
+        select DISTINCT mut.mutable_condition
+        from mutable mut
+        where mut.mutable_class = 'Year';
     </select>
 
     <insert id="insertXot" parameterType="Xot">

@@ -23,13 +23,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <result property="analysisId"    column="analysis_id"    />
             <result property="name"    column="name"    />
             <result property="description"    column="description"    />
-            <result property="program"    column="program"    />
-            <result property="programversion"    column="programversion"    />
-            <result property="doi"    column="doi"    />
-            <result property="url"    column="url"    />
-            <result property="source"    column="source"    />
             <result property="dbxrefId"    column="dbxref_id"    />
             <result property="populationId"    column="population_id"    />
+            <result property="detailed"    column="detailed"    />
+            <result property="methods"    column="methods"    />
+            <result property="omics"    column="omics"    />
+            <result property="reference"    column="reference"    />
         </association>
         <association property="environment" javaType="environment">
             <result property="environmentId"    column="environment_id"    />
@@ -268,7 +267,35 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
              </if>
             </where>
         </select>
+    <select id="selectExpressionReference" resultType="java.lang.String">
+        select DISTINCT accession from dbxref;
+    </select>
 
+    <select id="selectExpressionVersion" resultType="java.lang.String">
+        select DISTINCT version from dbxref where accession = #{reference}
+    </select>
+
+
+    <select id="selectAnalysis" resultType="java.lang.String">
+        select DISTINCT description from analysis;
+
+    </select>
+    <select id="selectExpressionGermplasm" resultType="java.lang.String">
+        select DISTINCT name from germplasm;
+
+    </select>
+    <select id="selectExpressionEnvironment" resultType="java.lang.String">
+        select DISTINCT environment_condition from environment
+    </select>
+    <select id="selectExpressionTissue" resultType="java.lang.String">
+        select DISTINCT tissue_position from tissue;
+    </select>
+    <select id="selectExpressionPopulation" resultType="java.lang.String">
+        select DISTINCT alias from population;
+    </select>
+    <select id="selectExpressionSubgroup" resultType="java.lang.String">
+        select DISTINCT name from subgroup;
+    </select>
 
 
 </mapper>

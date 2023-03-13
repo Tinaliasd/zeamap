@@ -18,7 +18,7 @@ ruoyi:
 # 开发环境配置
 server:
   # 服务器的HTTP端口，默认为8080
-  port: 9090
+  port: 8900
   servlet:
     # 应用的访问路径
     context-path: /
@@ -54,7 +54,7 @@ spring:
     # 国际化资源文件路径
     basename: i18n/messages
   profiles: 
-    active: druid
+    active: yj
   # 文件上传
   servlet:
      multipart:
@@ -70,13 +70,13 @@ spring:
   # redis 配置
   redis:
     # 地址
-    host: 124.222.17.33
+    host: 43.143.200.52
     # 端口，默认为6379
     port: 6379
     # 数据库索引
     database: 0
     # 密码
-    password: asdasd787987
+    password: WWW.3497jkl
     # 连接超时时间
     timeout: 10s
     lettuce:

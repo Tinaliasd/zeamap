@@ -1,6 +1,8 @@
 package com.ruoyi.zeamap.service;
 
 import java.util.List;
+import java.util.Map;
+
 import com.ruoyi.zeamap.domain.Expression;
 import com.ruoyi.zeamap.vo.ExpressionVo;
 
@@ -62,4 +64,9 @@ public interface IExpressionService
 
     List<Expression> selectmultiExpressionList(ExpressionVo expressionVo);
 
+    Map<String, List<String>> selectDownMenuAllData();
+
+    List<String> findAllReference();
+
+    List<String> findAllVersion(String reference);
 }

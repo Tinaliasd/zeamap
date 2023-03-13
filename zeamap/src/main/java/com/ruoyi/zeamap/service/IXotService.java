@@ -1,6 +1,8 @@
 package com.ruoyi.zeamap.service;
 
 import java.util.List;
+import java.util.Map;
+
 import com.ruoyi.zeamap.domain.Xot;
 import com.ruoyi.zeamap.vo.XotVo;
 
@@ -63,4 +65,6 @@ public interface IXotService
 
 
     public List<XotVo> selectXotFull(Xot xot);
+
+    public Map<String, List<String>> selectDownMenuData();
 }

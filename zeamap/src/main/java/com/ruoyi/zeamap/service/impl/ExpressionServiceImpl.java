@@ -1,6 +1,9 @@
 package com.ruoyi.zeamap.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.zeamap.vo.ExpressionVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +23,6 @@ public class ExpressionServiceImpl implements IExpressionService
 {
     @Autowired
     private ExpressionMapper expressionMapper;
-
 
 
     /**
@@ -111,5 +113,36 @@ public class ExpressionServiceImpl implements IExpressionService
         return expressions;
     }
 
+    @Override
+    public Map<String, List<String>> selectDownMenuAllData() {
 
+
+        List<String> Analysis = expressionMapper.selectAnalysis();
+        List<String> Germplasm = expressionMapper.selectExpressionGermplasm();
+        List<String> Environment = expressionMapper.selectExpressionEnvironment();
+        List<String> Tissue = expressionMapper.selectExpressionTissue();
+        List<String> Population = expressionMapper.selectExpressionPopulation();
+        List<String> Subgroup = expressionMapper.selectExpressionSubgroup();
+
+        Map<String, List<String>> res = new HashMap<>();
+        res.put("Analysis", Analysis);
+        res.put("Germplasm", Germplasm);
+        res.put("Environment", Environment);
+        res.put("Tissue", Tissue);
+        res.put("Population", Population);
+        res.put("Subgroup", Subgroup);
+        return res;
+    }
+
+    @Override
+    public List<String> findAllReference() {
+        List<String> references = expressionMapper.selectExpressionReference();
+        return references;
+    }
+
+    @Override
+    public List<String> findAllVersion(String reference) {
+        List<String> versions = expressionMapper.selectExpressionVersion(reference);
+        return versions;
+    }
 }

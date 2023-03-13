@@ -1,7 +1,9 @@
 package com.ruoyi.zeamap.service.impl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.ruoyi.zeamap.vo.XotVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -106,5 +108,30 @@ public class XotServiceImpl implements IXotService
         }
         return xotVos;
     }
+
+    @Override
+    public Map<String, List<String>> selectDownMenuData() {
+        List<String> Category = xotMapper.selectXotAllCategory();
+
+        List<String> Type = xotMapper.selectXotAllType();
+        List<String> Analysis = xotMapper.selectXotAllAnalysis();
+        List<String> Name = xotMapper.selectXotAllName();
+        List<String> Location = xotMapper.selectXotAllLocation();
+        List<String> TraitDateLoc = xotMapper.selectXotAllTraitDateLoc();
+        List<String> Year = xotMapper.selectXotAllYear();
+        List<String> Tissue = xotMapper.selectXotAllTissue();
+
+        Map<String, List<String>> res = new HashMap<>();
+        res.put("Type", Category);
+        res.put("Category", Type);
+        res.put("Analysis", Analysis);
+        res.put("Name", Name);
+        res.put("Location", Location);
+        res.put("TraitDateLoc", TraitDateLoc);
+        res.put("Year", Year);
+        res.put("Tissue", Tissue);
+        return res;
+    }
+
 
 }

@@ -1,6 +1,7 @@
 package com.ruoyi.web.controller.zeamap;
 
 import java.util.List;
+import java.util.Map;
 import javax.servlet.http.HttpServletResponse;
 
 import com.ruoyi.zeamap.domain.Analysis;
@@ -115,7 +116,6 @@ public class XotController extends BaseController
     public TableDataInfo XotFind(@RequestParam(required = false) String category,@RequestParam(required = false) String type,@RequestParam(required = false) String analysis,
                                  @RequestParam(required = false) String name,@RequestParam(required = false) String location,@RequestParam(required = false) String year,
                                  @RequestParam(required = false) String tissue,@RequestParam(required = false) String traitDateLoc) {
-
         startPage();
         Xot xot = new Xot();
         xot.setCategory(category);
@@ -131,4 +131,14 @@ public class XotController extends BaseController
         List<XotVo> list = xotService.selectXotFull(xot);
         return getDataTable(list);
     }
+
+
+    @GetMapping("/xots/DownMenu")
+    public AjaxResult XotDownMenu() {
+        //获得下拉菜单所有的数据
+        Map<String, List<String>> menuaData = xotService.selectDownMenuData();
+        return AjaxResult.success(menuaData);
+    }
+
+
 }

@@ -42,8 +42,34 @@ public class Xot extends BaseEntity
     @Excel(name = "关联analyssis表")
     private Long analysisId;
 
+
+
+
+    /** $column.columnComment */
+    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    private String crossrefid;
+
+    /** $column.columnComment */
+    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    private String crossreflink;
+
+    /** $column.columnComment */
+    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    private String description;
+
+    /** $column.columnComment */
+    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    private String mesuredetail;
+
+    /** $column.columnComment */
+    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    private String traitdetail;
+
     private Analysis analysis;
 
+
+
+    //返回数据添加的额外字段
     private String location;
 
     private String traitDateLoc;
@@ -157,6 +183,46 @@ public class Xot extends BaseEntity
         return analysisId;
     }
 
+    public String getCrossrefid() {
+        return crossrefid;
+    }
+
+    public void setCrossrefid(String crossrefid) {
+        this.crossrefid = crossrefid;
+    }
+
+    public String getCrossreflink() {
+        return crossreflink;
+    }
+
+    public void setCrossreflink(String crossreflink) {
+        this.crossreflink = crossreflink;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getMesuredetail() {
+        return mesuredetail;
+    }
+
+    public void setMesuredetail(String mesuredetail) {
+        this.mesuredetail = mesuredetail;
+    }
+
+    public String getTraitdetail() {
+        return traitdetail;
+    }
+
+    public void setTraitdetail(String traitdetail) {
+        this.traitdetail = traitdetail;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
@@ -168,6 +234,13 @@ public class Xot extends BaseEntity
                 .append("xotUid", getXotUid())
                 .append("analysisId", getAnalysisId())
                 .append("analysis", getAnalysis())
+                //后来表更改添加的字段
+                .append("crossrefid", getCrossrefid())
+                .append("crossreflink", getCrossreflink())
+                .append("description", getDescription())
+                .append("mesuredetail", getMesuredetail())
+                .append("traitdetail", getTraitdetail())
+
                 .append("location",getLocation())
                 .append("traitDateLoc",getTraitDateLoc())
                 .append("year",getYear())
