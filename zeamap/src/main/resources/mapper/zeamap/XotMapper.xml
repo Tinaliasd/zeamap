@@ -62,7 +62,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
     <select id="selectFull" parameterType="Xot" resultMap="XotResult">
         select tt.* from
-        (select xot.xot_id,xot.category,xot.`name`,xot.omics,xot.type,xot.xot_uid,max(CASE mut.mutable_class
+        (select xot.xot_id,xot.omics,xot.category,xot.`name`,xot.xot_uid,xot.type,max(CASE mut.mutable_class
         WHEN 'TraitDateLoc' THEN
         mut.mutable_condition
         END) as traitDateLoc,
@@ -79,7 +79,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         mut.mutable_condition
         END) as `year`,a.`name` as aname
         from xot inner join analysis a on a.analysis_id = xot.analysis_id
-        inner join  xot_mutable xt on xt.xot_id = xt.xot_id
+        inner join  xot_mutable xt on xt.xot_id = xot.xot_id
         inner join mutable mut on mut.mutable_id = xt.mutable_id
         <where>
             <if test="category != null  and category != ''"> and xot.category = #{category}</if>

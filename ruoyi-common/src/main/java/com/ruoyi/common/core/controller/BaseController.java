@@ -55,6 +55,10 @@ public class BaseController
         PageUtils.startPage();
     }
 
+    protected  void startPage(Integer pageSize,Integer pageNum){
+        PageUtils.startPage(pageSize, pageNum);
+    }
+
     /**
      * 设置请求排序数据
      */
@@ -87,6 +91,7 @@ public class BaseController
         rspData.setMsg("查询成功");
         rspData.setRows(list);
         rspData.setTotal(new PageInfo(list).getTotal());
+
         return rspData;
     }
 

@@ -5,6 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.ruoyi.zeamap.vo.XotVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -100,13 +103,13 @@ public class XotServiceImpl implements IXotService
 
 
     @Override
-    public List<XotVo> selectXotFull(Xot xot) {
-        List<Xot> xots = xotMapper.selectFull(xot);
-        List<XotVo> xotVos = new ArrayList<>();
-        for (Xot x:xots) {
-            xotVos.add(new XotVo(x.getXotId(), x.getXotUid(), x.getCategory(), x.getType(), x.getAnalysis().getName(),x.getName(), x.getLocation(), x.getTraitDateLoc(), x.getYear(), x.getTissue()));
-        }
-        return xotVos;
+    public List<Xot> selectXotFull(Xot xot) {
+
+
+        //其中隐藏了total 但是我们切换其他的进行接收
+        Page<Xot> xots = (Page)xotMapper.selectFull(xot);
+//        Page<Xot> xot1 = xots;
+        return xots;
     }
 
     @Override

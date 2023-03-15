@@ -103,8 +103,7 @@ public class ExpressionController extends BaseController
     }
 
 
-    @PreAuthorize("@ss.hasPermi('zeamap:expression:list')")
-    @PostMapping("/multi")
+    @PostMapping("/mutil")
     //5.2 的接口
     public TableDataInfo multiExpression (@RequestBody ExpressionVo expressionVo)
     {

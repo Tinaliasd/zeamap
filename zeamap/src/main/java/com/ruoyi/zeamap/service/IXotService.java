@@ -64,7 +64,7 @@ public interface IXotService
 
 
 
-    public List<XotVo> selectXotFull(Xot xot);
+    public List<Xot> selectXotFull(Xot xot);
 
     public Map<String, List<String>> selectDownMenuData();
 }

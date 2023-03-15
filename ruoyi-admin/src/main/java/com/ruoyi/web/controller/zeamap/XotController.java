@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpServletResponse;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import com.ruoyi.zeamap.domain.Analysis;
 import com.ruoyi.zeamap.domain.Xot;
 import com.ruoyi.zeamap.vo.XotVo;
@@ -116,8 +118,10 @@ public class XotController extends BaseController
     public TableDataInfo XotFind(@RequestParam(required = false) String category,@RequestParam(required = false) String type,@RequestParam(required = false) String analysis,
                                  @RequestParam(required = false) String name,@RequestParam(required = false) String location,@RequestParam(required = false) String year,
                                  @RequestParam(required = false) String tissue,@RequestParam(required = false) String traitDateLoc) {
+
         startPage();
         Xot xot = new Xot();
+
         xot.setCategory(category);
         xot.setType(type);
         Analysis a = new Analysis();
@@ -128,7 +132,10 @@ public class XotController extends BaseController
         xot.setTissue(tissue);
         xot.setTraitDateLoc(traitDateLoc);
         xot.setYear(year);
-        List<XotVo> list = xotService.selectXotFull(xot);
+
+
+        List<Xot> list = xotService.selectXotFull(xot);
+
         return getDataTable(list);
     }
 

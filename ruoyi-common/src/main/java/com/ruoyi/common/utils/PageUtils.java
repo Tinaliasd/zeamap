@@ -1,9 +1,14 @@
 package com.ruoyi.common.utils;
 
+import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.ruoyi.common.constant.HttpStatus;
 import com.ruoyi.common.core.page.PageDomain;
+import com.ruoyi.common.core.page.TableDataInfo;
 import com.ruoyi.common.core.page.TableSupport;
 import com.ruoyi.common.utils.sql.SqlUtil;
+
+import java.util.List;
 
 /**
  * 分页工具类
@@ -32,4 +37,5 @@ public class PageUtils extends PageHelper
     {
         PageHelper.clearPage();
     }
+
 }
