@@ -174,20 +174,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             inner join subgroup_dbxref sd on sd.dbxref_id = dbf.dbxref_id
             inner join subgroup sub on sub.subgroup_id = sd.subgroup_id
             <where>
-            <if test="analysis!=null">and a.description= #{analysis}</if>
-            <if test="environment!=null">and env.environment_condition= #{environment}</if>
-            <if test="germplasm!=null">and g.name= #{germplasm}</if>
-            <if test="tissue!=null">and t.tissue_position= #{tissue}</if>
-            <if test="population!=null">and pop.alias= #{population}</if>
-            <if test="subgroup!=null">and sub.name= #{subgroup}</if>
-            <if test="version !=null">and dbf.version = #{version}</if>
-            <if test="reference !=null">and dbf.accession = #{reference}</if>
-            <if test="geneIds !=null">and f.uniquename in
+            <if test="analysis!=null and analysis!=''">and a.description= #{analysis}</if>
+            <if test="environment!=null and environment!=''">and env.environment_condition= #{environment}</if>
+            <if test="germplasm!=null and germplasm!=''">and g.name= #{germplasm}</if>
+            <if test="tissue!=null and tissue!=''">and t.tissue_position= #{tissue}</if>
+            <if test="population!=null and population!=''">and pop.alias= #{population}</if>
+            <if test="subgroup!=null and subgroup!=''">and sub.name= #{subgroup}</if>
+            <if test="version !=null and version!=''">and dbf.version = #{version}</if>
+            <if test="reference !=null and reference!=''">and dbf.accession = #{reference}</if>
+            <if test="geneIds!=null and geneIds.size()!=0">and f.uniquename in
              <foreach collection="geneIds" index="index" item="geneId" open="(" separator="," close=")">
                  #{geneId}
             </foreach>
              </if>
-             <if test="selects !=null">and t.tissue_desc in
+             <if test="selects !=null and selects.size()!=0">and t.tissue_desc in
              <foreach collection="selects" index="index" item="select" open="(" separator="," close=")">
                  #{select}
             </foreach>
@@ -210,20 +210,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             inner join subgroup_dbxref sd on sd.dbxref_id = dbf.dbxref_id
             inner join subgroup sub on sub.subgroup_id = sd.subgroup_id
             <where>
-            <if test="analysis!=null">and a.description= #{analysis}</if>
-            <if test="environment!=null">and env.environment_condition= #{environment}</if>
-            <if test="germplasm!=null">and g.name= #{germplasm}</if>
-            <if test="tissue!=null">and t.tissue_position= #{tissue}</if>
-            <if test="population!=null">and pop.alias= #{population}</if>
-            <if test="subgroup!=null">and sub.name= #{subgroup}</if>
-            <if test="version !=null">and dbf.version = #{version}</if>
-            <if test="reference !=null">and dbf.accession = #{reference}</if>
-            <if test="geneIds !=null">and f.uniquename in
+            <if test="analysis!=null and analysis!=''">and a.description= #{analysis}</if>
+            <if test="environment!=null and environment!=''">and env.environment_condition= #{environment}</if>
+            <if test="germplasm!=null and germplasm!=''">and g.name= #{germplasm}</if>
+            <if test="tissue!=null and tissue!=''">and t.tissue_position= #{tissue}</if>
+            <if test="population!=null and population!=''">and pop.alias= #{population}</if>
+            <if test="subgroup!=null and subgroup!=''">and sub.name= #{subgroup}</if>
+            <if test="version !=null and version!=''">and dbf.version = #{version}</if>
+            <if test="reference !=null and reference!=''">and dbf.accession = #{reference}</if>
+                <if test="geneIds!=null and geneIds.size()!=0">and f.uniquename in
              <foreach collection="geneIds" index="index" item="geneId" open="(" separator="," close=")">
                  #{geneId}
             </foreach>
              </if>
-             <if test="selects !=null">and g.name in
+             <if test="selects !=null and selects.size()!=0">and g.name in
              <foreach collection="selects" index="index" item="select" open="(" separator="," close=")">
                  #{select}
             </foreach>
@@ -247,20 +247,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             inner join subgroup_dbxref sd on sd.dbxref_id = dbf.dbxref_id
             inner join subgroup sub on sub.subgroup_id = sd.subgroup_id
             <where>
-            <if test="analysis!=null">and a.description= #{analysis}</if>
-            <if test="environment!=null">and env.environment_condition= #{environment}</if>
-            <if test="germplasm!=null">and g.name= #{germplasm}</if>
-            <if test="tissue!=null">and t.tissue_position= #{tissue}</if>
-            <if test="population!=null">and pop.alias= #{population}</if>
-            <if test="subgroup!=null">and sub.name= #{subgroup}</if>
-            <if test="version !=null">and dbf.version = #{version}</if>
-            <if test="reference !=null">and dbf.accession = #{reference}</if>
-            <if test="geneIds !=null">and f.uniquename in
+            <if test="analysis!=null and analysis!=''">and a.description= #{analysis}</if>
+            <if test="environment!=null and environment!=''" >and env.environment_condition= #{environment}</if>
+            <if test="germplasm!=null and germplasm!=''">and g.name= #{germplasm}</if>
+            <if test="tissue!=null and tissue!=''">and t.tissue_position= #{tissue}</if>
+            <if test="population!=null and population!=''">and pop.alias= #{population}</if>
+            <if test="subgroup!=null and subgroup!=''">and sub.name= #{subgroup}</if>
+            <if test="version !=null and version!=''">and dbf.version = #{version}</if>
+            <if test="reference !=null and reference!=''">and dbf.accession = #{reference}</if>
+            <if test="geneIds!=null and geneIds.size()!=0">and f.uniquename in
              <foreach collection="geneIds" index="index" item="geneId" open="(" separator="," close=")">
                  #{geneId}
             </foreach>
              </if>
-             <if test="selects !=null">and env.environment_desc in
+             <if test="selects !=null and selects.size()!=0">and env.environment_desc in
              <foreach collection="selects" index="index" item="select" open="(" separator="," close=")">
                  #{select}
             </foreach>

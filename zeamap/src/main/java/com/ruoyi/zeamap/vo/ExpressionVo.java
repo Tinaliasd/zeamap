@@ -22,13 +22,9 @@ public class ExpressionVo {
     private String analysis;
 
     private int flag;//判断是哪一种
-
-
     private String environment;
-
     //Tissue
     private String germplasm;
-
     //Germplasm
     private String population;
 
@@ -131,23 +127,24 @@ public class ExpressionVo {
         this.flag = flag;
     }
 
+    public ExpressionVo() {
+    }
 
-
-    public ExpressionVo(String reference, String version, List<String> geneIds, String analysis,
-                        String environment, String germplasm, String population, String tissue,
-                        String subgroup, int flag, Map<String, List<String>> selector, List<String> selects) {
+    public ExpressionVo(String reference, String version, List<String> geneIds, String analysis, int flag, String environment, String germplasm, String population, String tissue, String subgroup, List<String> selects) {
         this.reference = reference;
         this.version = version;
         this.geneIds = geneIds;
         this.analysis = analysis;
+        this.flag = flag;
         this.environment = environment;
         this.germplasm = germplasm;
         this.population = population;
         this.tissue = tissue;
         this.subgroup = subgroup;
-        this.flag = flag;
         this.selects = selects;
     }
+
+
 
     @Override
     public String toString() {

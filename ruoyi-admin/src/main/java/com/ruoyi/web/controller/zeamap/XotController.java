@@ -132,8 +132,6 @@ public class XotController extends BaseController
         xot.setTissue(tissue);
         xot.setTraitDateLoc(traitDateLoc);
         xot.setYear(year);
-
-
         List<Xot> list = xotService.selectXotFull(xot);
 
         return getDataTable(list);
