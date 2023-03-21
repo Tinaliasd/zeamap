@@ -116,7 +116,7 @@ public class FeatureController extends BaseController
 //        return AjaxResult.success(DataMap);
 
         HashMap<String, String> map1 = new HashMap<>();
-
+        map1.put("geneID", uniquename);
         map1.put("B73_6-7_internode", "Internode-short");
         map1.put("B73_7-8_internode", "Internode-long");
         map1.put("B73_Vegetative_Meristem_16-19_Day", "SAM");
