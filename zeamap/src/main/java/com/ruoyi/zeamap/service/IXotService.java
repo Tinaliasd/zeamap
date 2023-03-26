@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.ruoyi.zeamap.domain.Xot;
-import com.ruoyi.zeamap.vo.XotVo;
+import com.ruoyi.zeamap.domain.XotGermplasm;
 
 /**
  * xotService接口
@@ -67,4 +67,9 @@ public interface IXotService
     public List<Xot> selectXotFull(Xot xot);
 
     public Map<String, List<String>> selectDownMenuData();
+
+    public Xot selectXotName(String uid);
+
+    public XotGermplasm selectGermplasmByXotId(Long id);
+
 }

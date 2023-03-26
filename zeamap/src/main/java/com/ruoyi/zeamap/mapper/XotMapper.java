@@ -1,7 +1,10 @@
 package com.ruoyi.zeamap.mapper;
 
 import java.util.List;
+
+import com.ruoyi.zeamap.domain.Germplasm;
 import com.ruoyi.zeamap.domain.Xot;
+import com.ruoyi.zeamap.domain.XotGermplasm;
 
 /**
  * xotMapper接口
@@ -87,4 +90,8 @@ public interface XotMapper
     List<String> selectXotAllDescription();
 
     List<String> selectXotAllAnalysisId();
+
+    Xot selectXotName(String uid);
+
+    XotGermplasm selectGermplasmByXotId();
 }

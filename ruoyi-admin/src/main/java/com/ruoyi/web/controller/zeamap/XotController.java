@@ -1,13 +1,13 @@
 package com.ruoyi.web.controller.zeamap;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpServletResponse;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
-import com.ruoyi.zeamap.domain.Analysis;
-import com.ruoyi.zeamap.domain.Xot;
+import com.ruoyi.zeamap.domain.*;
 import com.ruoyi.zeamap.vo.XotVo;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -125,11 +125,13 @@ public class XotController extends BaseController
         xot.setCategory(category);
         xot.setType(type);
         xot.setDescription(name);
-        Analysis a = new Analysis();
+//        Analysis a = new Analysis();
 //        a.setName(analysis);
+//        xot.setAnalysis(a);
+        if(analysis!=null){
+            xot.setAnalysisId(Long.valueOf(analysis));
+        }
 
-        a.setAnalysisId(Long.valueOf(analysis));
-        xot.setAnalysis(a);
 
 //        xot.setName(name);//name 不是 xot 和analysis的name而是description
         xot.setDescription(name);
@@ -150,5 +152,19 @@ public class XotController extends BaseController
         return AjaxResult.success(menuaData);
     }
 
+    @GetMapping("/xots/uidgermplasm")
+    public AjaxResult XotUidGermplasm(@RequestParam String uid) {
+        //获得下拉菜单所有的数据
+        Xot xot  = xotService.selectXotName(uid);
+        Long id = xot.getXotId();
+        XotGermplasm res = xotService.selectGermplasmByXotId(id);
+//        Mutable mutable = null;
+//        Germplasm germplasm= null;
+//        Map<String, Object> res = new HashMap<>();
+//        res.put("Xot", xot);
+//        res.put("mutable", mutable);
+//        res.put("germplasm", germplasm);
+        return AjaxResult.success(res);
+    }
 
 }

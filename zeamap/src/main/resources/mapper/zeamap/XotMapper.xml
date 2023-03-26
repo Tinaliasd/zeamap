@@ -77,7 +77,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         max(CASE mut.mutable_class
         WHEN 'Year' THEN
         mut.mutable_condition
-        END) as `year`,a.`name` as aname
+        END) as `year`,a.`name` as aname,a.analysis_id
         from xot inner join analysis a on a.analysis_id = xot.analysis_id
         inner join  xot_mutable xt on xt.xot_id = xot.xot_id
         inner join mutable mut on mut.mutable_id = xt.mutable_id
@@ -146,6 +146,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="selectXotAllAnalysisId" resultType="java.lang.String">
         select DISTINCT analysis.analysis_id from analysis;
     </select>
+    <select id="selectXotName" resultType="com.ruoyi.zeamap.domain.Xot">
+        select * from xot where xot.name = #{uid};
+    </select>
+    <select id="selectGermplasmByXotId" resultType="com.ruoyi.zeamap.domain.XotGermplasm">
+        select xg.*
+        from xot_germplasm xg
+        where xg.xot_id = #{uid};
+
+    </select>
+
 
     <insert id="insertXot" parameterType="Xot">
         insert into xot

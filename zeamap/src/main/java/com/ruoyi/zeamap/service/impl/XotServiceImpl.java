@@ -1,14 +1,10 @@
 package com.ruoyi.zeamap.service.impl;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.github.pagehelper.Page;
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
-import com.ruoyi.zeamap.vo.XotVo;
+import com.ruoyi.zeamap.domain.XotGermplasm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.zeamap.mapper.XotMapper;
@@ -110,6 +106,17 @@ public class XotServiceImpl implements IXotService
         List<Xot> xots = xotMapper.selectFull(xot);
 //        Page<Xot> xot1 = xots;
         return xots;
+    }
+
+    @Override
+    public Xot selectXotName(String uid) {
+        Xot xot = xotMapper.selectXotName(uid);
+        return xot;
+    }
+
+    @Override
+    public XotGermplasm selectGermplasmByXotId(Long id) {
+        return xotMapper.selectGermplasmByXotId();
     }
 
     @Override
