@@ -153,18 +153,24 @@ public class XotController extends BaseController
     }
 
     @GetMapping("/xots/uidgermplasm")
-    public AjaxResult XotUidGermplasm(@RequestParam String uid) {
+    public TableDataInfo XotUidGermplasm(@RequestParam String uid) {
+
+//        使用startPage
+        startPage();
+        List<XotGermplasm> xotGermplasms = xotService.selectGermplasmByXot(uid);
+        return getDataTable(xotGermplasms);
+
         //获得下拉菜单所有的数据
-        Xot xot  = xotService.selectXotName(uid);
-        Long id = xot.getXotId();
-        XotGermplasm res = xotService.selectGermplasmByXotId(id);
+//        Long xot  = xotService.selectXotName(uid);
+//        System.out.println(xot);
+//        List<XotGermplasm> res = xotService.selectGermplasmByXotId(xot);
 //        Mutable mutable = null;
 //        Germplasm germplasm= null;
 //        Map<String, Object> res = new HashMap<>();
 //        res.put("Xot", xot);
 //        res.put("mutable", mutable);
 //        res.put("germplasm", germplasm);
-        return AjaxResult.success(res);
+//        return AjaxResult.success(res);
     }
 
 }

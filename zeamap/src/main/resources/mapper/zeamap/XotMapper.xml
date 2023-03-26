@@ -141,18 +141,29 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where mut.mutable_class = 'Year';
     </select>
     <select id="selectXotAllDescription" resultType="java.lang.String">
-        select DISTINCT xot.description from xot;
+        select DISTINCT xot.description from xot
     </select>
     <select id="selectXotAllAnalysisId" resultType="java.lang.String">
-        select DISTINCT analysis.analysis_id from analysis;
+        select DISTINCT analysis.analysis_id from analysis
     </select>
-    <select id="selectXotName" resultType="com.ruoyi.zeamap.domain.Xot">
-        select * from xot where xot.name = #{uid};
+
+
+    <select id="selectXotName" resultType="java.lang.Long">
+        select xot_id
+        from xot
+        where xot.`name` = #{uid}
+
     </select>
     <select id="selectGermplasmByXotId" resultType="com.ruoyi.zeamap.domain.XotGermplasm">
         select xg.*
         from xot_germplasm xg
-        where xg.xot_id = #{uid};
+        where xg.xot_id = #{id}
+    </select>
+    <select id="selectGermplasmByXot" resultType="com.ruoyi.zeamap.domain.XotGermplasm">
+        select xg.*
+        from xot_germplasm xg
+                 inner join xot on xg.xot_id = xot.xot_id
+        where xot.name = #{uid}
 
     </select>
 

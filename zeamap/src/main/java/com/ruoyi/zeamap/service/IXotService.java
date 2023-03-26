@@ -68,8 +68,9 @@ public interface IXotService
 
     public Map<String, List<String>> selectDownMenuData();
 
-    public Xot selectXotName(String uid);
+    public Long  selectXotName(String uid);
 
-    public XotGermplasm selectGermplasmByXotId(Long id);
+    public List<XotGermplasm> selectGermplasmByXotId(Long uid);
 
+    public List<XotGermplasm> selectGermplasmByXot(String uid);
 }

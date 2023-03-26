@@ -91,7 +91,9 @@ public interface XotMapper
 
     List<String> selectXotAllAnalysisId();
 
-    Xot selectXotName(String uid);
+    Long selectXotName(String uid);
 
-    XotGermplasm selectGermplasmByXotId();
+    List<XotGermplasm> selectGermplasmByXotId(Long uid);
+
+    List<XotGermplasm> selectGermplasmByXot(String uid);
 }

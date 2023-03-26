@@ -109,14 +109,20 @@ public class XotServiceImpl implements IXotService
     }
 
     @Override
-    public Xot selectXotName(String uid) {
-        Xot xot = xotMapper.selectXotName(uid);
+    public Long selectXotName(String uid) {
+        Long xot = xotMapper.selectXotName(uid);
         return xot;
     }
 
     @Override
-    public XotGermplasm selectGermplasmByXotId(Long id) {
-        return xotMapper.selectGermplasmByXotId();
+    public List<XotGermplasm> selectGermplasmByXotId(Long uid) {
+        List<XotGermplasm> res =   xotMapper.selectGermplasmByXotId(uid);
+        return res;
+    }
+
+    @Override
+    public List<XotGermplasm> selectGermplasmByXot(String uid) {
+        return xotMapper.selectGermplasmByXot(uid);
     }
 
     @Override
