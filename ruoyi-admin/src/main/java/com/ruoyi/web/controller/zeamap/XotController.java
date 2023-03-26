@@ -124,10 +124,15 @@ public class XotController extends BaseController
 
         xot.setCategory(category);
         xot.setType(type);
+        xot.setDescription(name);
         Analysis a = new Analysis();
-        a.setName(analysis);
+//        a.setName(analysis);
+
+        a.setAnalysisId(Long.valueOf(analysis));
         xot.setAnalysis(a);
-        xot.setName(name);
+
+//        xot.setName(name);//name 不是 xot 和analysis的name而是description
+        xot.setDescription(name);
         xot.setLocation(location);
         xot.setTissue(tissue);
         xot.setTraitDateLoc(traitDateLoc);

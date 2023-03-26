@@ -52,7 +52,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="type != null  and type != ''"> and xot.type = #{type}</if>
             <if test="name != null  and name != ''"> and xot.name like concat('%', #{name}, '%')</if>
             <if test="xotUid != null  and xotUid != ''"> and xot.xot_uid = #{xotUid}</if>
-            <if test="analysisId != null  and analysisId != ''"> and xot.analysis_id = #{analysisId}</if>
+            <if test="analysisId != null  and analysisId != 0"> and xot.analysis_id = #{analysisId}</if>
         </where>
     </select>
     
@@ -84,8 +84,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <where>
             <if test="category != null  and category != ''"> and xot.category = #{category}</if>
             <if test="type != null  and type != ''"> and xot.type = #{type}</if>
-            <if test="name != null  and name != ''"> and xot.name like concat('%', #{name}, '%')</if>
-            <if test="analysis.name != null  and analysis.name != ''"> and a.name = #{analysis.name}</if>
+            <if test="analysisId != null  and analysisId != 0"> and xot.analysis_id = #{analysisId}</if>
+            <if test="description != null  and description != ''"> and xot.description = #{description}</if>
+<!--            <if test="name != null  and name != ''"> and xot.name like concat('%', #{name}, '%')</if>-->
+<!--            <if test="analysis.name != null  and analysis.name != ''"> and a.name = #{analysis.name}</if>-->
         </where>
         GROUP BY xot.xot_id,a.`name`
         ) as tt <where>
@@ -138,6 +140,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         from mutable mut
         where mut.mutable_class = 'Year';
     </select>
+    <select id="selectXotAllDescription" resultType="java.lang.String">
+        select DISTINCT xot.description from xot;
+    </select>
+    <select id="selectXotAllAnalysisId" resultType="java.lang.String">
+        select DISTINCT analysis.analysis_id from analysis;
+    </select>
 
     <insert id="insertXot" parameterType="Xot">
         insert into xot
@@ -172,7 +180,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="analysisId != null">analysis_id = #{analysisId},</if>
         </trim>
         where xot_id = #{xotId}
-    </update>
+</update>
+
 
     <delete id="deleteXotByXotId" parameterType="Long">
         delete from xot where xot_id = #{xotId}

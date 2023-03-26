@@ -83,4 +83,8 @@ public interface XotMapper
     List<String> selectXotAllYear();
 
     List<String> selectXotAllName();
+
+    List<String> selectXotAllDescription();
+
+    List<String> selectXotAllAnalysisId();
 }

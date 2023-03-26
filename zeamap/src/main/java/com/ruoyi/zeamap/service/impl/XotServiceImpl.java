@@ -107,7 +107,7 @@ public class XotServiceImpl implements IXotService
 
 
         //其中隐藏了total 但是我们切换其他的进行接收
-        Page<Xot> xots = (Page)xotMapper.selectFull(xot);
+        List<Xot> xots = xotMapper.selectFull(xot);
 //        Page<Xot> xot1 = xots;
         return xots;
     }
@@ -117,8 +117,15 @@ public class XotServiceImpl implements IXotService
         List<String> Category = xotMapper.selectXotAllCategory();
 
         List<String> Type = xotMapper.selectXotAllType();
-        List<String> Analysis = xotMapper.selectXotAllAnalysis();
-        List<String> Name = xotMapper.selectXotAllName();
+//        List<String> Analysis = xotMapper.selectXotAllAnalysis();
+//        List<String> Name = xotMapper.selectXotAllName();
+
+        List<String> Analysis = xotMapper.selectXotAllAnalysisId();
+        //name 是 的description
+        List<String> Name = xotMapper.selectXotAllDescription();
+
+
+
         List<String> Location = xotMapper.selectXotAllLocation();
         List<String> TraitDateLoc = xotMapper.selectXotAllTraitDateLoc();
         List<String> Year = xotMapper.selectXotAllYear();
