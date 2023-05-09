@@ -107,9 +107,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
     <!--查找Trait Id -->
     <select id="selecttraitid" resultType="String">
-        select distinct xot_uid from xot,association_marker,association_qtl
+        <!--测试代码-->
+        select distinct xot_uid
+        from xot
+        <!--select distinct xot_uid from xot,association_marker,association_qtl
         where xot.xot_uid=association_qtl.trait_id
-          and association_qtl_id=qtl_id
+          and association_qtl_id=qtl_id-->
     </select>
     <!--查找chr-->
     <select id="selectchr" resultType="String">
